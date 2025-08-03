@@ -8,48 +8,37 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Dark theme base colors */
-    --background: 222 47% 5%;
-    --foreground: 210 40% 98%;
+    /* Light minimalist theme */
+    --background: 0 0% 100%;
+    --foreground: 210 11% 15%;
 
-    --card: 222 47% 8%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 11% 15%;
 
-    --popover: 222 47% 8%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 11% 15%;
 
-    /* Electric blue primary */
-    --primary: 206 100% 60%;
-    --primary-foreground: 222 47% 5%;
-    --primary-glow: 206 100% 70%;
+    /* Single blue accent */
+    --primary: 210 100% 40%;
+    --primary-foreground: 0 0% 100%;
 
-    /* Neon green secondary */
-    --secondary: 120 100% 60%;
-    --secondary-foreground: 222 47% 5%;
-    --secondary-glow: 120 100% 70%;
+    --secondary: 210 4% 95%;
+    --secondary-foreground: 210 11% 15%;
 
-    --muted: 222 47% 12%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 210 4% 95%;
+    --muted-foreground: 210 4% 40%;
 
-    --accent: 222 47% 15%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 210 4% 95%;
+    --accent-foreground: 210 11% 15%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 222 47% 20%;
-    --input: 222 47% 15%;
-    --ring: 206 100% 60%;
+    --border: 210 4% 90%;
+    --input: 210 4% 95%;
+    --ring: 210 100% 40%;
 
-    /* Design system tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
-    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary-glow)));
-    --gradient-hero: linear-gradient(135deg, hsl(var(--background)), hsl(222 47% 8%));
-    --shadow-glow-primary: 0 0 30px hsl(var(--primary) / 0.3);
-    --shadow-glow-secondary: 0 0 30px hsl(var(--secondary) / 0.3);
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -121,100 +110,45 @@ All colors MUST be HSL.
     scroll-behavior: smooth;
   }
 
-  /* Custom animations */
-  .animate-gradient {
-    background-size: 400% 400%;
-    animation: gradient-shift 8s ease infinite;
-  }
-
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-  }
-
-  .animate-glow {
-    animation: glow 2s ease-in-out infinite alternate;
-  }
-
-  /* Particle background animation */
-  .particles {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-  }
-
-  .particle {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: hsl(var(--primary));
-    border-radius: 50%;
-    animation: particle-float 20s infinite linear;
-    opacity: 0.6;
+  /* Minimal animations */
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out;
   }
 }
 
 @layer components {
-  /* Button variants */
-  .btn-hero {
-    @apply bg-gradient-to-r from-primary to-primary-glow text-primary-foreground px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:shadow-[var(--shadow-glow-primary)] hover:scale-105;
+  /* Navigation */
+  .nav-sticky {
+    @apply fixed top-0 left-0 right-0 bg-background/80 backdrop-blur-md border-b border-border z-50;
   }
 
-  .btn-secondary {
-    @apply bg-gradient-to-r from-secondary to-secondary-glow text-secondary-foreground px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:shadow-[var(--shadow-glow-secondary)] hover:scale-105;
+  /* Minimal buttons */
+  .btn-primary {
+    @apply bg-primary text-primary-foreground px-6 py-3 rounded-md font-medium transition-colors hover:bg-primary/90;
   }
 
   .btn-outline {
-    @apply border border-primary text-primary px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:shadow-[var(--shadow-glow-primary)];
+    @apply border border-border text-foreground px-6 py-3 rounded-md font-medium transition-colors hover:bg-accent;
   }
 
-  /* Card styles */
-  .card-glass {
-    @apply bg-card/50 backdrop-blur-sm border border-border rounded-xl p-6 transition-all duration-300 hover:bg-card/70 hover:border-primary/30;
+  /* Cards */
+  .project-card {
+    @apply bg-card border border-border rounded-lg p-6 transition-all duration-300 hover:shadow-lg hover:border-primary/20;
   }
 
-  .card-project {
-    @apply bg-card border border-border rounded-xl overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-2;
-  }
-
-  /* Text gradients */
-  .text-gradient-primary {
-    @apply bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent;
-  }
-
-  .text-gradient-secondary {
-    @apply bg-gradient-to-r from-secondary to-secondary-glow bg-clip-text text-transparent;
+  /* Skills badge */
+  .skill-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-secondary text-secondary-foreground border border-border;
   }
 }
 
-@keyframes gradient-shift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-}
-
-@keyframes glow {
-  from { text-shadow: 0 0 10px hsl(var(--primary)), 0 0 20px hsl(var(--primary)), 0 0 30px hsl(var(--primary)); }
-  to { text-shadow: 0 0 20px hsl(var(--primary)), 0 0 30px hsl(var(--primary)), 0 0 40px hsl(var(--primary)); }
-}
-
-@keyframes particle-float {
-  0% {
-    transform: translateY(100vh) rotate(0deg);
+@keyframes fade-in {
+  from {
     opacity: 0;
+    transform: translateY(20px);
   }
-  10% {
-    opacity: 0.6;
-  }
-  90% {
-    opacity: 0.6;
-  }
-  100% {
-    transform: translateY(-100vh) rotate(360deg);
-    opacity: 0;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
