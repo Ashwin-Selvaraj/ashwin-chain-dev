@@ -1,4 +1,5 @@
 import headshotImage from '@/assets/headshot.jpg';
+import Card3D from './Card3D';
 
 const AboutSection = () => {
   const skills = [
@@ -15,14 +16,13 @@ const AboutSection = () => {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Photo */}
           <div className="flex justify-center md:justify-start">
-            <div className="relative">
+            <Card3D className="relative w-80 h-80 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
               <img 
                 src={headshotImage} 
                 alt="Ashwin - Blockchain Developer" 
-                className="w-80 h-80 object-cover rounded-2xl shadow-lg"
+                className="w-full h-full object-cover rounded-2xl relative z-0"
               />
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-primary/20 to-secondary/20 opacity-0 hover:opacity-100 transition-opacity duration-300" />
-            </div>
+            </Card3D>
           </div>
           
           {/* Content */}

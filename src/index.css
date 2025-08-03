@@ -218,3 +218,14 @@ All colors MUST be HSL.
     opacity: 0;
   }
 }
+
+/* 3D Card Effect */
+.card-3d {
+  transform-style: preserve-3d;
+  transform: rotate3d(0);
+}
+
+.card-3d:hover {
+  transition-duration: 150ms;
+  box-shadow: 0 10px 30px 10px rgba(0, 0, 0, 0.3);
+}
