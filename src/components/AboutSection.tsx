@@ -1,5 +1,5 @@
 import headshotImage from '@/assets/headshot.jpg';
-import Card3D from './Card3D';
+import ParallaxCard from './ParallaxCard';
 
 const AboutSection = () => {
   const skills = [
@@ -16,13 +16,13 @@ const AboutSection = () => {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Photo */}
           <div className="flex justify-center md:justify-start">
-            <Card3D className="relative w-80 h-80 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <ParallaxCard>
               <img 
                 src={headshotImage} 
                 alt="Ashwin - Blockchain Developer" 
-                className="w-full h-full object-cover rounded-2xl relative z-0"
+                className="w-full h-full object-cover rounded-2xl absolute inset-0"
               />
-            </Card3D>
+            </ParallaxCard>
           </div>
           
           {/* Content */}
