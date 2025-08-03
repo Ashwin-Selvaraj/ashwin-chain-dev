@@ -42,9 +42,18 @@ const Card3D = ({ children, className = '' }: Card3DProps) => {
           circle at
           ${center.x * 2 + bounds.width / 2}px
           ${center.y * 2 + bounds.height / 2}px,
-          rgba(255, 255, 255, 0.3),
+          rgba(255, 0, 0, 0.2),
+          rgba(0, 255, 0, 0.1),
+          rgba(0, 0, 255, 0.2),
           rgba(0, 0, 0, 0.1)
         )
+      `;
+
+      // Add RGB shadow effect
+      card.style.boxShadow = `
+        ${center.x / 25}px ${center.y / 25}px 20px rgba(255, 0, 0, 0.3),
+        ${-center.x / 25}px ${-center.y / 25}px 20px rgba(0, 255, 0, 0.3),
+        0 0 20px rgba(0, 0, 255, 0.3)
       `;
     };
 
@@ -56,6 +65,7 @@ const Card3D = ({ children, className = '' }: Card3DProps) => {
     const handleMouseLeave = () => {
       document.removeEventListener('mousemove', rotateToMouse);
       card.style.transform = '';
+      card.style.boxShadow = '';
       glow.style.backgroundImage = '';
     };
 
@@ -89,7 +99,11 @@ const Card3D = ({ children, className = '' }: Card3DProps) => {
           left: 0,
           top: 0,
           borderRadius: 'inherit',
-          backgroundImage: 'radial-gradient(circle at 50% -20%, rgba(255, 255, 255, 0.15), rgba(0, 0, 0, 0.1))',
+          backgroundImage: `
+            radial-gradient(circle at 50% -20%, rgba(255, 0, 0, 0.1), transparent 50%),
+            radial-gradient(circle at -20% 50%, rgba(0, 255, 0, 0.1), transparent 50%),
+            radial-gradient(circle at 120% 50%, rgba(0, 0, 255, 0.1), transparent 50%)
+          `,
           pointerEvents: 'none',
           zIndex: 1,
         }}
