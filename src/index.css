@@ -286,3 +286,42 @@ All colors MUST be HSL.
 .container--active {
   transition: none;
 }
+
+/* Animation for fade and slide-up */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+/* Gradient text effect */
+.gradient-text {
+  background: linear-gradient(90deg, #00dbde, #fc00ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gradient border effect */
+.gradient-border {
+  position: relative;
+  border-radius: 1rem;
+  background: linear-gradient(90deg, #00dbde, #fc00ff);
+  padding: 2px; /* Border thickness */
+}
+
+.gradient-border .inner {
+  background: white;
+  border-radius: 0.9rem;
+  padding: 1.5rem;
+}
