@@ -75,7 +75,7 @@ const ExperienceSection = () => {
       
       <div className="max-w-6xl mx-auto relative z-20">
         <div className="text-center mb-20">
-          <h2 className="cursor-target text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+          <h2 className="cursor-target text-4xl md:text-6xl font-bold mb-4 text-gradient-primary">
             Experience & Community
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
