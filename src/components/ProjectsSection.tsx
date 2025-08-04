@@ -17,35 +17,35 @@ const ProjectsSection = () => {
       description: "A streak-based rewards platform that gamifies TV watching using on-chain token claims and Web3 incentives.",
       tags: ["Web3", "Ethereum", "Rewards", "Streak System"],
       github: "#",
-      live: "#"
+      live: "https://www.thememe.tv/"
     },
     {
       title: "Square NFT",
       description: "NFT minting and management system designed for creators and collectors.",
       tags: ["NFT", "Smart Contracts", "IPFS"],
       github: "#",
-      live: "#"
+      live: "https://www.squarenft.com/"
     },
     {
       title: "Coin Diary",
       description: "A daily journaling app integrated with blockchain data to log market sentiment and personal trading notes.",
       tags: ["Crypto", "React", "Blockchain Logs"],
       github: "#",
-      live: "#"
+      live: "https://coindiary.com/"
     },
     {
       title: "TheBitcoin.com",
       description: "A Bitcoin-focused web portal with educational content and interactive features for newcomers.",
       tags: ["Bitcoin", "Web3", "Education"],
       github: "#",
-      live: "#"
+      live: "https://thebitcoin.com/"
     },
     {
       title: "Decentric.io",
       description: "A unified dApp interface for tracking wallet performance and interacting with smart contracts across chains.",
       tags: ["Multi-chain", "dApp Dashboard", "React"],
       github: "#",
-      live: "#"
+      live: "https://decentric.io/"
     }
   ];
 
@@ -54,26 +54,26 @@ const ProjectsSection = () => {
       title: "Decentralized Lottery",
       description: "A smart contract-based lottery system with provable fairness and no central authority.",
       tags: ["Solidity", "Randomness", "Smart Contracts"],
-      github: "#",
-      live: "#"
+      github: "https://github.com/Ashwin-Selvaraj/Decentralized-Lottery.git",
+      live: "https://decentralized-lottery-six.vercel.app/"
     },
     {
       title: "Token Faucet",
       description: "A simple dApp to distribute test tokens on a custom network.",
       tags: ["Web3", "Faucet", "Ethereum"],
-      github: "#",
-      live: "#"
+      github: "https://github.com/Ashwin-Selvaraj/Token-Faucet-Dapp.git",
+      live: "https://token-faucet-dapp.vercel.app/"
     },
     {
       title: "NFT Mint",
       description: "An NFT minting portal allowing users to upload metadata and mint directly from the frontend.",
       tags: ["NFT", "React", "IPFS", "Ethereum"],
-      github: "#",
-      live: "#"
+      github: "https://github.com/Ashwin-Selvaraj/NFT-FULL-MINT-WEBSITE.git",
+      live: "https://nft-full-mint-website.vercel.app/"
     }
   ];
 
-  const ProjectCard = ({ project, index }: { project: typeof companyProjects[0], index: number }) => (
+  const ProjectCard = ({ project, index, showGitHub = false }: { project: typeof companyProjects[0], index: number, showGitHub?: boolean }) => (
     <GlareHover
       width="100%"
       height="auto"
@@ -107,27 +107,31 @@ const ProjectsSection = () => {
         </div>
         
         <div className="flex gap-3 pt-2">
-          <Button 
-            variant="outline" 
-            size="sm"
-            className="flex-1"
-            asChild
-          >
-            <a href={project.github} target="_blank" rel="noopener noreferrer">
+          {showGitHub && (
+            <Button 
+              variant="outline" 
+              size="sm"
+              className="flex-1"
+              onClick={() => {
+                console.log("GitHub clicked for:", project.title);
+                window.open(project.github, '_blank', 'noopener,noreferrer');
+              }}
+            >
               <Github className="w-4 h-4 mr-2" />
               GitHub
-            </a>
-          </Button>
+            </Button>
+          )}
           
           <Button 
             size="sm"
-            className="flex-1 btn-hero"
-            asChild
+            className={showGitHub ? "flex-1 btn-hero" : "w-full btn-hero"}
+            onClick={() => {
+              console.log("Button clicked for:", project.title);
+              window.open(project.live, '_blank', 'noopener,noreferrer');
+            }}
           >
-            <a href={project.live} target="_blank" rel="noopener noreferrer">
-              <ExternalLink className="w-4 h-4 mr-2" />
-              Live Demo
-            </a>
+            <ExternalLink className="w-4 h-4 mr-2" />
+            Live Demo
           </Button>
         </div>
       </div>
@@ -175,7 +179,7 @@ const ProjectsSection = () => {
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {companyProjects.map((project, index) => (
-              <ProjectCard key={project.title} project={project} index={index} />
+              <ProjectCard key={project.title} project={project} index={index} showGitHub={false} />
             ))}
           </div>
         </div>
@@ -188,7 +192,7 @@ const ProjectsSection = () => {
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {personalProjects.map((project, index) => (
-              <ProjectCard key={project.title} project={project} index={index} />
+              <ProjectCard key={project.title} project={project} index={index} showGitHub={true} />
             ))}
           </div>
         </div>

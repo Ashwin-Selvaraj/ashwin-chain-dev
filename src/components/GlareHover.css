@@ -4,10 +4,9 @@
   background: var(--gh-bg);
   border-radius: var(--gh-br);
   border: 1px solid var(--gh-border);
-  overflow: hidden;
+  overflow: visible;
   position: relative;
-  display: grid;
-  place-items: center;
+  display: block;
 }
 
 .glare-hover::before {
@@ -27,6 +26,16 @@
 
 .glare-hover:hover {
   cursor: pointer;
+}
+
+.glare-hover * {
+  pointer-events: auto;
+}
+
+.glare-hover button,
+.glare-hover a {
+  position: relative;
+  z-index: 10;
 }
 
 .glare-hover:hover::before {
