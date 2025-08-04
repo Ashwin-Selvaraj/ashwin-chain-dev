@@ -2,15 +2,27 @@ import { ArrowDown, Github, Mail } from 'lucide-react';
 import ParticleBackground from './ParticleBackground';
 import SilkBackground from './SilkBackground';
 import { Button } from '@/components/ui/button';
+import { useIntersectionObserver } from '@/hooks/use-intersection-observer';
 
 const HeroSection = () => {
+  const { elementRef, isIntersecting } = useIntersectionObserver({
+    threshold: 0.1,
+    rootMargin: '0px'
+  });
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     element?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section 
+      ref={elementRef}
+      id="hero" 
+      className={`relative min-h-screen flex items-center justify-center overflow-hidden transition-opacity duration-500 ${
+        isIntersecting ? 'opacity-100' : 'opacity-0'
+      }`}
+    >
       <SilkBackground 
         speed={1}
         scale={0.8}
@@ -22,6 +34,9 @@ const HeroSection = () => {
       
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-background/80 via-background/70 to-background/60" />
+      
+      {/* Bottom gradient overlay for smooth transition to About section */}
+      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent z-20 pointer-events-none" />
       
       <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
         <h1 className="text-6xl md:text-8xl font-bold mb-6 animate-fade-in">

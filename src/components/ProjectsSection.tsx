@@ -2,8 +2,15 @@ import { ExternalLink, Github } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import GlareHover from './GlareHover';
+import Cubes from './Cubes';
+import { useIntersectionObserver } from '@/hooks/use-intersection-observer';
 
 const ProjectsSection = () => {
+  const { elementRef, isIntersecting } = useIntersectionObserver({
+    threshold: 0.1,
+    rootMargin: '0px'
+  });
+
   const companyProjects = [
     {
       title: "TheMemeTV",
@@ -128,8 +135,34 @@ const ProjectsSection = () => {
   );
 
   return (
-    <section id="projects" className="py-20 px-6 bg-muted/30">
-      <div className="max-w-7xl mx-auto">
+    <section 
+      ref={elementRef}
+      id="projects" 
+      className={`py-20 px-6 bg-muted/30 relative overflow-hidden transition-opacity duration-500 ${
+        isIntersecting ? 'opacity-100' : 'opacity-0'
+      }`}
+    >
+      {/* Subtle gradient overlays */}
+      <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-background to-transparent z-20 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent z-20 pointer-events-none" />
+      
+      {/* Background Cubes */}
+      <div className="absolute inset-0 opacity-30 z-0">
+        <Cubes 
+          gridSize={12}
+          maxAngle={180}
+          radius={5}
+          borderStyle="2px solid #5227FF"
+          faceColor="#1a1a2e"
+          rippleColor="#ff6b6b"
+          rippleSpeed={2.5}
+          autoAnimate={true}
+          rippleOnClick={true}
+        />
+      </div>
+      
+      <div className="max-w-7xl mx-auto relative z-30 pointer-events-none">
+        <div className="pointer-events-auto">
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-gradient-primary">
           Projects
         </h2>
@@ -158,6 +191,7 @@ const ProjectsSection = () => {
               <ProjectCard key={project.title} project={project} index={index} />
             ))}
           </div>
+        </div>
         </div>
       </div>
     </section>

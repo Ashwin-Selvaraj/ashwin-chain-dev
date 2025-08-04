@@ -119,6 +119,17 @@ All colors MUST be HSL.
   /* Smooth scrolling */
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 2rem;
+  }
+
+  /* Optimized transitions - only for specific elements */
+  .transition-smooth {
+    transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+  }
+
+  /* Section transitions - lighter */
+  section {
+    transition: opacity 0.3s ease;
   }
 
   /* Custom animations */

@@ -2,8 +2,14 @@ import headshotImage from '@/assets/headshot.jpg';
 import ashwinProfile from '@/assets/ashwinProfile.jpg';
 import ProfileCard from './ProfileCard';
 import ScrollVelocity from './ScrollVelocity';
+import { useIntersectionObserver } from '@/hooks/use-intersection-observer';
 
 const AboutSection = () => {
+  const { elementRef, isIntersecting } = useIntersectionObserver({
+    threshold: 0.1,
+    rootMargin: '0px'
+  });
+
   const skills = [
     '💻 Ethereum 🌉 Base 🔷 Polygon 🟡 Binance 💠 TON ⚡ Solana 🔐 Smart Contracts 🧱 Layer 2 📜 Solidity 🦀 Rust 🧠 Tact 🌍 Web3',
     '⚛️ React 🌐 Next.js 🟨 JavaScript 🌿 Node.js 🍃 MongoDB ☁️ AWS 🧾 HTML 🎨 CSS ☕ Java'
@@ -17,8 +23,20 @@ const AboutSection = () => {
   };
 
   return (
-    <section id="about" className="py-20 px-6">
-      <div className="max-w-6xl mx-auto">
+    <section 
+      ref={elementRef}
+      id="about" 
+      className={`py-20 px-6 relative transition-opacity duration-500 ${
+        isIntersecting ? 'opacity-100' : 'opacity-0'
+      }`}
+    >
+      {/* Top gradient overlay for smooth transition from Hero section */}
+      <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-background to-transparent pointer-events-none z-10" />
+      
+      {/* Bottom gradient overlay for smooth transition to Projects section */}
+      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent pointer-events-none z-10" />
+      
+      <div className="max-w-6xl mx-auto relative z-20">
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-gradient-primary">
           About Me
         </h2>

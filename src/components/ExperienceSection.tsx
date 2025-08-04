@@ -26,8 +26,12 @@ const ExperienceSection = () => {
   ];
 
   return (
-    <section id="experience" className="py-20 px-6">
-      <div className="max-w-4xl mx-auto">
+    <section id="experience" className="py-20 px-6 relative">
+      {/* Subtle gradient overlays */}
+      <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-background to-transparent z-10 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent z-10 pointer-events-none" />
+      
+      <div className="max-w-4xl mx-auto relative z-20">
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-gradient-primary">
           Experience & Community
         </h2>
