@@ -1,4 +1,4 @@
-import { Calendar, MapPin, Building, Users } from 'lucide-react';
+import { Clock, MapPin, Building, Users } from 'lucide-react';
 import TargetCursor from './TargetCursor';
 
 const ExperienceSection = () => {
@@ -116,7 +116,7 @@ const ExperienceSection = () => {
                             </div>
                             <div>
                               <span className="cursor-target inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary/10 to-secondary/10 text-primary rounded-full text-sm font-medium border border-primary/20">
-                                <Calendar className="w-4 h-4 mr-2" />
+                                <Clock className="w-4 h-4 mr-2" />
                                 {experience.year}
                               </span>
                             </div>
