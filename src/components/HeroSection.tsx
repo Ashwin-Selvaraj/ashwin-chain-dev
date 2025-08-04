@@ -3,6 +3,7 @@ import ParticleBackground from './ParticleBackground';
 import SilkBackground from './SilkBackground';
 import { Button } from '@/components/ui/button';
 import { useIntersectionObserver } from '@/hooks/use-intersection-observer';
+import RotatingText from './RotatingText';
 
 const HeroSection = () => {
   const { elementRef, isIntersecting } = useIntersectionObserver({
@@ -43,8 +44,28 @@ const HeroSection = () => {
           <span className="text-gradient-primary animate-glow">Ashwin</span>
         </h1>
         
-        <h2 className="text-2xl md:text-3xl text-muted-foreground mb-6 animate-fade-in [animation-delay:0.3s]">
-          Blockchain Developer | <span className="text-gradient-primary">Ethereum</span> | <span className="text-gradient-secondary">Solana</span>
+        <h2 className="text-2xl md:text-3xl text-muted-foreground mb-6 animate-fade-in [animation-delay:0.3s] flex flex-wrap items-center justify-center gap-2">
+          <span className="text-gradient-primary">Blockchain Developer</span> 
+          <span className="text-muted-foreground">|</span>
+          <RotatingText
+            texts={[
+              "Ethereum",
+              "Binance Smart Chain",
+              "Solana",
+              "Polygon",
+              "Base",
+              "TON"
+            ]}
+            mainClassName="px-3 py-1 bg-primary/10 border border-primary/20 rounded-lg text-white font-medium inline-flex items-center"
+            staggerFrom="last"
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "-120%" }}
+            staggerDuration={0.025}
+            splitLevelClassName="overflow-hidden"
+            transition={{ type: "spring", damping: 30, stiffness: 400 }}
+            rotationInterval={3000}
+          />
         </h2>
         
         <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto animate-fade-in [animation-delay:0.6s]">
@@ -69,7 +90,7 @@ const HeroSection = () => {
         
         <div className="flex justify-center gap-6 animate-fade-in [animation-delay:1.2s]">
           <a 
-            href="https://github.com/ashwin" 
+            href="https://github.com/Ashwin-Selvaraj" 
             target="_blank" 
             rel="noopener noreferrer"
             className="text-muted-foreground hover:text-primary transition-colors duration-300"
@@ -77,7 +98,7 @@ const HeroSection = () => {
             <Github size={24} />
           </a>
           <a 
-            href="mailto:ashwin@example.com"
+            href="mailto:ashwin240899@gmail.com"
             className="text-muted-foreground hover:text-primary transition-colors duration-300"
           >
             <Mail size={24} />
