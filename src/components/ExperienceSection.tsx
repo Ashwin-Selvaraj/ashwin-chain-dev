@@ -12,7 +12,7 @@ const ExperienceSection = () => {
       icon: Users,
       description:
         "Promoted to Team Lead for driving innovation in multi-chain dApps and leading blockchain solutions. Overseeing a team building products on Ethereum, TON, Polygon, and Base. Focused on scalability, protocol integrations, and smart contract architecture.",
-      tags: ["Leadership", "Multi-chain", "Ethereum", "TON", "Polygon", "Base"]
+      tags: ["Leadership", "Multi-chain", "Binance Smart Chain", "TON", "Solana", "Base"]
     },
     {
       year: "May 2024 – Sep 2024",
@@ -23,7 +23,7 @@ const ExperienceSection = () => {
       icon: Building,
       description:
         "Worked across Base, Binance Smart Chain, Ethereum, TON, and Polygon ecosystems. Built NFT minting platforms, token utilities, and multi-chain dApp dashboards to enhance user experience and protocol interaction.",
-      tags: ["NFT", "dApps", "Base", "BSC", "Ethereum"]
+      tags: ["NFT", "dApps", "Base", "BSC"]
     },
     {
       year: "2024 – Present",
@@ -34,7 +34,7 @@ const ExperienceSection = () => {
       icon: Users,
       description:
         "Hosted meetups, hackathons, and workshops to onboard developers into Web3. Organized Road to Devcon events, Devcon Satellite sessions, and led the 10 Years of Ethereum Celebration in my community.",
-      tags: ["Community", "Hackathons", "Devcon", "Web3", "Events"]
+      tags: ["Community", "Hackathons", "Devcon", "Events"]
     },
     {
       year: "Sep 2023 – Jan 2024",
@@ -45,7 +45,7 @@ const ExperienceSection = () => {
       icon: Building,
       description:
         "Delivered blockchain solutions with focus on smart contracts, token standards, and full-stack dApp development. Supported early-stage Web3 product rollouts.",
-      tags: ["Smart Contracts", "Token Standards", "dApp", "Web3"]
+      tags: ["Smart Contracts", "Token Standards", "Freelance"]
     },
     {
       year: "Aug 2021 – May 2024",
@@ -56,7 +56,7 @@ const ExperienceSection = () => {
       icon: Building,
       description:
         "Worked on blockchain R&D projects involving asset tokenization, DAO design, and upgradable smart contracts. Delivered multiple ERC20/721 implementations and built decentralized project management tools.",
-      tags: ["R&D", "Tokenization", "DAO", "ERC20", "ERC721"]
+      tags: ["R&D", "Tokenization", "DAO", "ERC20", "ERC721", "Project Management"]
     }
   ];
   
@@ -145,17 +145,17 @@ const ExperienceSection = () => {
                           {experience.description}
                         </p>
                         
-                        {/* Tags */}
-                        <div className="flex flex-wrap gap-2">
-                          {experience.tags.map((tag, tagIndex) => (
-                            <span 
-                              key={tagIndex}
-                              className="px-3 py-1 bg-gradient-to-r from-accent/10 to-primary/10 text-accent text-sm rounded-full border border-accent/20 hover:border-accent/40 transition-colors duration-200"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
+                                                 {/* Tags */}
+                         <div className="flex flex-wrap gap-2">
+                           {experience.tags.map((tag, tagIndex) => (
+                             <span 
+                               key={tagIndex}
+                               className="px-3 py-2 bg-gradient-to-r from-primary/20 to-secondary/20 text-primary font-medium text-sm rounded-lg border border-primary/30 hover:border-primary/50 hover:bg-gradient-to-r hover:from-primary/30 hover:to-secondary/30 transition-all duration-200 shadow-sm"
+                             >
+                               {tag}
+                             </span>
+                           ))}
+                         </div>
                       </div>
                     </div>
                   </div>
