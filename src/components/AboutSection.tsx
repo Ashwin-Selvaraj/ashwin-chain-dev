@@ -1,11 +1,15 @@
 import headshotImage from '@/assets/headshot.jpg';
 import ashwinProfile from '@/assets/ashwinProfile.jpg';
 import ProfileCard from './ProfileCard';
+import ScrollVelocity from './ScrollVelocity';
 
 const AboutSection = () => {
   const skills = [
-    'Ethereum', 'Solana', 'Smart Contracts', 'React', 'Next.js', 'Layer 2', 'Web3'
+    '💻 Ethereum 🌉 Base 🔷 Polygon 🟡 Binance 💠 TON ⚡ Solana 🔐 Smart Contracts 🧱 Layer 2 📜 Solidity 🦀 Rust 🧠 Tact 🌍 Web3',
+    '⚛️ React 🌐 Next.js 🟨 JavaScript 🌿 Node.js 🍃 MongoDB ☁️ AWS 🧾 HTML 🎨 CSS ☕ Java'
+
   ];
+  
 
   const handleContactClick = () => {
     const contactSection = document.getElementById('contact');
@@ -53,16 +57,15 @@ const AboutSection = () => {
             {/* Skills */}
             <div className="space-y-4">
               <h3 className="text-xl font-semibold text-foreground">Skills & Technologies</h3>
-              <div className="flex flex-wrap gap-3">
-                {skills.map((skill) => (
-                  <span 
-                    key={skill}
-                    className="px-4 py-2 bg-card border border-border rounded-lg text-sm font-medium hover:border-primary/50 transition-colors duration-300"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
+              <ScrollVelocity
+                texts={skills}
+                velocity={50}
+                className="text-xl font-bold text-foreground"
+                numCopies={4}
+                damping={100}
+                stiffness={200}
+                velocityMapping={{ input: [0, 200], output: [0, 1] }}
+              />
             </div>
           </div>
         </div>
