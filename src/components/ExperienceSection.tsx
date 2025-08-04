@@ -1,4 +1,4 @@
-import { Clock, MapPin, Building, Users } from 'lucide-react';
+import { Clock, MapPin, Building, Users, Code2, Zap, Globe, Briefcase, Laptop } from 'lucide-react';
 import TargetCursor from './TargetCursor';
 
 const ExperienceSection = () => {
@@ -9,7 +9,7 @@ const ExperienceSection = () => {
       company: "Throughbit Technologies Pvt Ltd",
       location: "Coimbatore, India (On-site)",
       type: "leadership",
-      icon: Users,
+      icon: Zap,
       description:
         "Promoted to Team Lead for driving innovation in multi-chain dApps and leading blockchain solutions. Overseeing a team building products on Ethereum, TON, Polygon, and Base. Focused on scalability, protocol integrations, and smart contract architecture.",
       tags: ["Leadership", "Multi-chain", "Binance Smart Chain", "TON", "Solana", "Base"]
@@ -20,7 +20,7 @@ const ExperienceSection = () => {
       company: "Throughbit Technologies Pvt Ltd",
       location: "Coimbatore, India (On-site)",
       type: "development",
-      icon: Building,
+      icon: Code2,
       description:
         "Worked across Base, Binance Smart Chain, Ethereum, TON, and Polygon ecosystems. Built NFT minting platforms, token utilities, and multi-chain dApp dashboards to enhance user experience and protocol interaction.",
       tags: ["NFT", "dApps", "Base", "BSC"]
@@ -31,7 +31,7 @@ const ExperienceSection = () => {
       company: "Ethereum Communities",
       location: "Global",
       type: "community",
-      icon: Users,
+      icon: Globe,
       description:
         "Hosted meetups, hackathons, and workshops to onboard developers into Web3. Organized Road to Devcon events, Devcon Satellite sessions, and led the 10 Years of Ethereum Celebration in my community.",
       tags: ["Community", "Hackathons", "Devcon", "Events"]
@@ -42,7 +42,7 @@ const ExperienceSection = () => {
       company: "Infognana (IG) Solutions",
       location: "Remote",
       type: "freelance",
-      icon: Building,
+      icon: Briefcase,
       description:
         "Delivered blockchain solutions with focus on smart contracts, token standards, and full-stack dApp development. Supported early-stage Web3 product rollouts.",
       tags: ["Smart Contracts", "Token Standards", "Freelance"]
@@ -53,7 +53,7 @@ const ExperienceSection = () => {
       company: "Infosys Ltd",
       location: "Bangalore, India (Hybrid)",
       type: "corporate",
-      icon: Building,
+      icon: Laptop,
       description:
         "Worked on blockchain R&D projects involving asset tokenization, DAO design, and upgradable smart contracts. Delivered multiple ERC20/721 implementations and built decentralized project management tools.",
       tags: ["R&D", "Tokenization", "DAO", "ERC20", "ERC721", "Project Management"]
