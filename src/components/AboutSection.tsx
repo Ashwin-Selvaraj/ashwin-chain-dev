@@ -1,9 +1,16 @@
 import headshotImage from '@/assets/headshot.jpg';
+import ashwinProfile from '@/assets/ashwinProfile.jpg';
+import ProfileCard from './ProfileCard';
 
 const AboutSection = () => {
   const skills = [
     'Ethereum', 'Solana', 'Smart Contracts', 'React', 'Next.js', 'Layer 2', 'Web3'
   ];
+
+  const handleContactClick = () => {
+    const contactSection = document.getElementById('contact');
+    contactSection?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <section id="about" className="py-20 px-6">
@@ -13,16 +20,20 @@ const AboutSection = () => {
         </h2>
         
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Photo */}
+          {/* Profile Card */}
           <div className="flex justify-center md:justify-start">
-            <div className="relative">
-              <img 
-                src={headshotImage} 
-                alt="Ashwin - Blockchain Developer" 
-                className="w-80 h-80 object-cover rounded-2xl shadow-lg"
-              />
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-primary/20 to-secondary/20 opacity-0 hover:opacity-100 transition-opacity duration-300" />
-            </div>
+            <ProfileCard
+              name="ASHWIN"
+              title="Blockchain Developer"
+              handle="ashontech"
+              status="Online"
+              contactText="Contact Me"
+              avatarUrl={ashwinProfile}
+              showUserInfo={true}
+              enableTilt={true}
+              enableMobileTilt={false}
+              onContactClick={handleContactClick}
+            />
           </div>
           
           {/* Content */}
