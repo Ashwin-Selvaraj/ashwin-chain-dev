@@ -1,6 +1,7 @@
 import { ExternalLink, Github } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import GlareHover from './GlareHover';
 
 const ProjectsSection = () => {
   const companyProjects = [
@@ -66,11 +67,22 @@ const ProjectsSection = () => {
   ];
 
   const ProjectCard = ({ project, index }: { project: typeof companyProjects[0], index: number }) => (
-    <div 
-      className="card-project animate-fade-in"
+    <GlareHover
+      width="100%"
+      height="auto"
+      background="hsl(var(--card))"
+      borderRadius="12px"
+      borderColor="hsl(var(--border))"
+      glareColor="#ffffff"
+      glareOpacity={0.2}
+      glareAngle={-30}
+      glareSize={200}
+      transitionDuration={600}
+      playOnce={false}
+      className="animate-fade-in"
       style={{ animationDelay: `${index * 0.1}s` }}
     >
-      <div className="p-6 space-y-4">
+      <div className="p-6 space-y-4 w-full">
         <h3 className="text-xl font-semibold text-foreground">
           {project.title}
         </h3>
@@ -112,7 +124,7 @@ const ProjectsSection = () => {
           </Button>
         </div>
       </div>
-    </div>
+    </GlareHover>
   );
 
   return (
