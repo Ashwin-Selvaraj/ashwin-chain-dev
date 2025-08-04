@@ -3,28 +3,48 @@ import { Calendar, MapPin } from 'lucide-react';
 const ExperienceSection = () => {
   const experiences = [
     {
-      year: "2021 – Present",
-      title: "Blockchain Developer",
+      year: "Sep 2024 – Present",
+      title: "Development Team Lead",
       company: "Throughbit Technologies Pvt Ltd",
-      location: "Remote",
-      description: "Leading blockchain development initiatives, architecting smart contracts, and building Web3 applications with a focus on DeFi and NFT ecosystems."
+      location: "Coimbatore, India (On-site)",
+      description:
+        "Promoted to Team Lead for driving innovation in multi-chain dApps and leading blockchain solutions. Overseeing a team building products on Ethereum, TON, Polygon, and Base. Focused on scalability, protocol integrations, and smart contract architecture."
     },
     {
-      year: "2024",
+      year: "May 2024 – Sep 2024",
+      title: "Full Stack Blockchain Developer",
+      company: "Throughbit Technologies Pvt Ltd",
+      location: "Coimbatore, India (On-site)",
+      description:
+        "Worked across Base, Binance Smart Chain, Ethereum, TON, and Polygon ecosystems. Built NFT minting platforms, token utilities, and multi-chain dApp dashboards to enhance user experience and protocol interaction."
+    },
+    {
+      year: "2024 – Present",
       title: "Community Event Organizer",
-      company: "Ethereum & Bitcoin Communities",
+      company: "Ethereum Communities",
       location: "Global",
-      description: "Organized community events and workshops, bringing together developers and enthusiasts to learn about blockchain technology and cryptocurrency adoption."
+      description:
+        "Hosted meetups, hackathons, and workshops to onboard developers into Web3. Organized Road to Devcon events, Devcon Satellite sessions, and led the 10 Years of Ethereum Celebration in my community."
     },
     {
-      year: "2023 – Present",
-      title: "Speaker & Volunteer",
-      company: "Ethereum Hackathons & Devcon",
-      location: "Various Locations",
-      description: "Active speaker and volunteer at Ethereum hackathons and Devcon events, sharing knowledge about smart contract security and blockchain scalability."
+      year: "Sep 2023 – Jan 2024",
+      title: "Freelance Blockchain Developer",
+      company: "Infognana (IG) Solutions",
+      location: "Remote",
+      description:
+        "Delivered blockchain solutions with focus on smart contracts, token standards, and full-stack dApp development. Supported early-stage Web3 product rollouts."
+    },
+    {
+      year: "Aug 2021 – May 2024",
+      title: "Blockchain Developer",
+      company: "Infosys Ltd",
+      location: "Bangalore, India (Hybrid)",
+      description:
+        "Worked on blockchain R&D projects involving asset tokenization, DAO design, and upgradable smart contracts. Delivered multiple ERC20/721 implementations and built decentralized project management tools."
     }
   ];
-
+  
+  
   return (
     <section id="experience" className="py-20 px-6 relative">
       {/* Subtle gradient overlays */}
@@ -59,18 +79,20 @@ const ExperienceSection = () => {
                 </div>
                 
                 {/* Content */}
-                <div className="card-glass flex-1 md:ml-4">
-                  <h3 className="text-xl font-semibold text-foreground mb-2">
-                    {experience.title}
-                  </h3>
-                  
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-4">
-                    <span className="text-primary font-medium">
-                      {experience.company}
-                    </span>
-                    <span className="flex items-center text-muted-foreground text-sm">
+                <div className="card-glass flex-1 md:ml-4 relative">
+                  <div className="flex justify-between items-start mb-2">
+                    <h3 className="text-xl font-semibold text-foreground">
+                      {experience.title}
+                    </h3>
+                    <span className="flex items-center text-muted-foreground text-sm flex-shrink-0 ml-4">
                       <MapPin className="w-4 h-4 mr-1" />
                       {experience.location}
+                    </span>
+                  </div>
+                  
+                  <div className="mb-4">
+                    <span className="text-primary font-medium">
+                      {experience.company}
                     </span>
                   </div>
                   
