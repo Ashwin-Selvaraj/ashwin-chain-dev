@@ -154,7 +154,7 @@ const ProjectsSection = () => {
           radius={5}
           borderStyle="2px solid #5227FF"
           faceColor="#1a1a2e"
-          rippleColor="#ff6b6b"
+          rippleColor="#22c55e"
           rippleSpeed={2.5}
           autoAnimate={true}
           rippleOnClick={true}
