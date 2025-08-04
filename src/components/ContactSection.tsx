@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import MagicBento from './MagicBento';
+import MagicBentoWrapper from './MagicBentoWrapper';
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -36,25 +38,25 @@ const ContactSection = () => {
     {
       name: 'GitHub',
       icon: Github,
-      url: 'https://github.com/ashwin',
+      url: 'https://github.com/Ashwin-Selvaraj',
       color: 'hover:text-primary'
     },
     {
       name: 'LinkedIn',
       icon: Linkedin,
-      url: 'https://linkedin.com/in/ashwin',
+      url: 'https://www.linkedin.com/in/ashwin240899/',
       color: 'hover:text-primary'
     },
     {
       name: 'Twitter',
       icon: Twitter,
-      url: 'https://twitter.com/ashwin',
+      url: 'https://x.com/ashontech_',
       color: 'hover:text-primary'
     },
     {
       name: 'Email',
       icon: Mail,
-      url: 'mailto:ashwin@example.com',
+      url: 'mailto:ashwin240899@gmail.com',
       color: 'hover:text-secondary'
     }
   ];
@@ -78,40 +80,67 @@ const ContactSection = () => {
             </div>
             
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <Input
-                  type="text"
-                  name="name"
-                  placeholder="Your Name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="bg-background/50 border-border focus:border-primary"
-                />
+              {/* Name Input with MagicBento Effect */}
+              <div className="mb-6">
+                <MagicBentoWrapper 
+                  particleCount={25}
+                  glowColor="132, 0, 255"
+                  enableTilt={true}
+                  clickEffect={true}
+                  enableMagnetism={true}
+                >
+                  <Input
+                    type="text"
+                    name="name"
+                    placeholder="Your Name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="bg-background/50 border-border focus:border-primary"
+                  />
+                </MagicBentoWrapper>
               </div>
               
-              <div>
-                <Input
-                  type="email"
-                  name="email"
-                  placeholder="Your Email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="bg-background/50 border-border focus:border-primary"
-                />
+              {/* Email Input with MagicBento Effect */}
+              <div className="mb-6">
+                <MagicBentoWrapper 
+                  particleCount={25}
+                  glowColor="132, 0, 255"
+                  enableTilt={true}
+                  clickEffect={true}
+                  enableMagnetism={true}
+                >
+                  <Input
+                    type="email"
+                    name="email"
+                    placeholder="Your Email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="bg-background/50 border-border focus:border-primary"
+                  />
+                </MagicBentoWrapper>
               </div>
               
-              <div>
-                <Textarea
-                  name="message"
-                  placeholder="Your Message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={5}
-                  className="bg-background/50 border-border focus:border-primary resize-none"
-                />
+              {/* Message Input with MagicBento Effect */}
+              <div className="mb-6">
+                <MagicBentoWrapper 
+                  particleCount={25}
+                  glowColor="132, 0, 255"
+                  enableTilt={true}
+                  clickEffect={true}
+                  enableMagnetism={true}
+                >
+                  <Textarea
+                    name="message"
+                    placeholder="Your Message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    rows={5}
+                    className="bg-background/50 border-border focus:border-primary resize-none"
+                  />
+                </MagicBentoWrapper>
               </div>
               
               <Button type="submit" className="w-full btn-hero">
@@ -128,18 +157,27 @@ const ContactSection = () => {
                 I'm always open to discussing new opportunities, interesting projects, or just having a chat about blockchain technology.
               </p>
               
+              {/* Social Links with Glow Effect */}
               <div className="grid grid-cols-2 gap-4">
                 {socialLinks.map((link) => (
-                  <a
+                  <MagicBentoWrapper
                     key={link.name}
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`flex items-center gap-3 p-3 rounded-lg bg-background/50 border border-border transition-all duration-300 ${link.color} hover:border-current hover:scale-105`}
+                    particleCount={20}
+                    glowColor="132, 0, 255"
+                    enableTilt={false}
+                    clickEffect={true}
+                    enableMagnetism={false}
                   >
-                    <link.icon className="w-5 h-5" />
-                    <span className="font-medium">{link.name}</span>
-                  </a>
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`flex items-center gap-3 p-3 rounded-lg bg-background/50 border border-border transition-all duration-300 ${link.color} hover:border-current hover:scale-105`}
+                    >
+                      <link.icon className="w-5 h-5" />
+                      <span className="font-medium">{link.name}</span>
+                    </a>
+                  </MagicBentoWrapper>
                 ))}
               </div>
             </div>
