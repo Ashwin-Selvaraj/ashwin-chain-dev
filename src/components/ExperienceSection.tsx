@@ -1,4 +1,5 @@
 import { Calendar, MapPin } from 'lucide-react';
+import TargetCursor from './TargetCursor';
 
 const ExperienceSection = () => {
   const experiences = [
@@ -47,12 +48,18 @@ const ExperienceSection = () => {
   
   return (
     <section id="experience" className="py-20 px-6 relative">
+      <TargetCursor 
+        spinDuration={2}
+        hideDefaultCursor={false}
+        targetSelector=".cursor-target"
+        sectionId="experience"
+      />
       {/* Subtle gradient overlays */}
       <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-background to-transparent z-10 pointer-events-none" />
       <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent z-10 pointer-events-none" />
       
       <div className="max-w-4xl mx-auto relative z-20">
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-gradient-primary">
+        <h2 className="cursor-target text-4xl md:text-5xl font-bold text-center mb-16 text-gradient-primary">
           Experience & Community
         </h2>
         
@@ -72,7 +79,7 @@ const ExperienceSection = () => {
                 
                 {/* Year badge */}
                 <div className="md:ml-20 flex-shrink-0">
-                  <span className="inline-flex items-center px-4 py-2 bg-primary/10 text-primary rounded-lg text-sm font-medium">
+                  <span className="cursor-target inline-flex items-center px-4 py-2 bg-primary/10 text-primary rounded-lg text-sm font-medium">
                     <Calendar className="w-4 h-4 mr-2" />
                     {experience.year}
                   </span>
@@ -81,17 +88,17 @@ const ExperienceSection = () => {
                 {/* Content */}
                 <div className="card-glass flex-1 md:ml-4 relative">
                   <div className="flex justify-between items-start mb-2">
-                    <h3 className="text-xl font-semibold text-foreground">
+                    <h3 className="cursor-target text-xl font-semibold text-foreground">
                       {experience.title}
                     </h3>
-                    <span className="flex items-center text-muted-foreground text-sm flex-shrink-0 ml-4">
+                    <span className="cursor-target flex items-center text-muted-foreground text-sm flex-shrink-0 ml-4">
                       <MapPin className="w-4 h-4 mr-1" />
                       {experience.location}
                     </span>
                   </div>
                   
                   <div className="mb-4">
-                    <span className="text-primary font-medium">
+                    <span className="cursor-target text-primary font-medium">
                       {experience.company}
                     </span>
                   </div>
