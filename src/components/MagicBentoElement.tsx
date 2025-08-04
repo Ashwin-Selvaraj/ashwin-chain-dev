@@ -3,29 +3,27 @@ import { gsap } from "gsap";
 import "./MagicBento.css";
 
 const DEFAULT_PARTICLE_COUNT = 8;
-const DEFAULT_GLOW_COLOR = "132, 0, 255";
+const DEFAULT_GLOW_COLOR = "255, 0, 0";
 
 const createParticleElement = (x, y, color = DEFAULT_GLOW_COLOR) => {
   const el = document.createElement("div");
   el.className = "particle";
   el.style.cssText = `
     position: absolute;
-    width: 3px;
-    height: 3px;
+    width: 4px;
+    height: 4px;
     border-radius: 50%;
-    background: rgba(${color}, 0.4);
-    box-shadow: 
-      0 0 4px rgba(${color}, 0.4),
-      0 0 6px rgba(${color}, 0.2);
+    background: rgba(${color}, 1);
+    box-shadow: 0 0 6px rgba(${color}, 0.6);
     pointer-events: none;
-    z-index: 1000;
+    z-index: 100;
     left: ${x}px;
     top: ${y}px;
   `;
   return el;
 };
 
-const MagicBentoWrapper = ({
+const MagicBentoElement = ({
   children,
   className = "",
   particleCount = DEFAULT_PARTICLE_COUNT,
@@ -34,7 +32,7 @@ const MagicBentoWrapper = ({
   clickEffect = true,
   enableMagnetism = true,
 }) => {
-  const wrapperRef = useRef(null);
+  const elementRef = useRef(null);
   const particlesRef = useRef([]);
   const timeoutsRef = useRef([]);
   const isHoveredRef = useRef(false);
@@ -43,9 +41,9 @@ const MagicBentoWrapper = ({
   const magnetismAnimationRef = useRef(null);
 
   const initializeParticles = useCallback(() => {
-    if (particlesInitialized.current || !wrapperRef.current) return;
+    if (particlesInitialized.current || !elementRef.current) return;
 
-    const { width, height } = wrapperRef.current.getBoundingClientRect();
+    const { width, height } = elementRef.current.getBoundingClientRect();
     memoizedParticles.current = Array.from({ length: particleCount }, () =>
       createParticleElement(
         Math.random() * width,
@@ -76,7 +74,7 @@ const MagicBentoWrapper = ({
   }, []);
 
   const animateParticles = useCallback(() => {
-    if (!wrapperRef.current || !isHoveredRef.current) return;
+    if (!elementRef.current || !isHoveredRef.current) return;
 
     if (!particlesInitialized.current) {
       initializeParticles();
@@ -84,10 +82,10 @@ const MagicBentoWrapper = ({
 
     memoizedParticles.current.forEach((particle, index) => {
       const timeoutId = setTimeout(() => {
-        if (!isHoveredRef.current || !wrapperRef.current) return;
+        if (!isHoveredRef.current || !elementRef.current) return;
 
         const clone = particle.cloneNode(true);
-        wrapperRef.current.appendChild(clone);
+        elementRef.current.appendChild(clone);
         particlesRef.current.push(clone);
 
         gsap.fromTo(
@@ -95,22 +93,20 @@ const MagicBentoWrapper = ({
           { scale: 0, opacity: 0 },
           { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(1.7)" }
         );
-        
-        console.log("Particle created and animated");
 
         gsap.to(clone, {
-          x: (Math.random() - 0.5) * 20,
-          y: (Math.random() - 0.5) * 20,
-          rotation: Math.random() * 90,
-          duration: 4 + Math.random() * 2,
+          x: (Math.random() - 0.5) * 100,
+          y: (Math.random() - 0.5) * 100,
+          rotation: Math.random() * 360,
+          duration: 2 + Math.random() * 2,
           ease: "none",
           repeat: -1,
           yoyo: true,
         });
 
         gsap.to(clone, {
-          opacity: 0.1,
-          duration: 3,
+          opacity: 0.3,
+          duration: 1.5,
           ease: "power2.inOut",
           repeat: -1,
           yoyo: true,
@@ -122,19 +118,18 @@ const MagicBentoWrapper = ({
   }, [initializeParticles]);
 
   useEffect(() => {
-    if (!wrapperRef.current) return;
+    if (!elementRef.current) return;
 
-    const element = wrapperRef.current;
+    const element = elementRef.current;
 
     const handleMouseEnter = () => {
-      console.log("Mouse entered - starting particles for:", element);
       isHoveredRef.current = true;
       animateParticles();
 
       if (enableTilt) {
         gsap.to(element, {
-          rotateX: 2,
-          rotateY: 2,
+          rotateX: 5,
+          rotateY: 5,
           duration: 0.3,
           ease: "power2.out",
           transformPerspective: 1000,
@@ -175,8 +170,8 @@ const MagicBentoWrapper = ({
       const centerY = rect.height / 2;
 
       if (enableTilt) {
-        const rotateX = ((y - centerY) / centerY) * -5;
-        const rotateY = ((x - centerX) / centerX) * 5;
+        const rotateX = ((y - centerY) / centerY) * -10;
+        const rotateY = ((x - centerX) / centerX) * 10;
 
         gsap.to(element, {
           rotateX,
@@ -188,8 +183,8 @@ const MagicBentoWrapper = ({
       }
 
       if (enableMagnetism) {
-        const magnetX = (x - centerX) * 0.02;
-        const magnetY = (y - centerY) * 0.02;
+        const magnetX = (x - centerX) * 0.05;
+        const magnetY = (y - centerY) * 0.05;
 
         magnetismAnimationRef.current = gsap.to(element, {
           x: magnetX,
@@ -269,23 +264,13 @@ const MagicBentoWrapper = ({
 
   return (
     <div
-      ref={wrapperRef}
+      ref={elementRef}
       className={`${className} particle-container`}
-      style={{ 
-        position: "relative", 
-        overflow: "visible",
-        cursor: "pointer",
-        border: "1px solid transparent"
-      }}
-      onMouseEnter={() => {
-        console.log("Wrapper mouse enter");
-        console.log("GSAP available:", typeof gsap !== 'undefined');
-        console.log("Wrapper ref:", wrapperRef.current);
-      }}
+      style={{ position: "relative", overflow: "hidden" }}
     >
       {children}
     </div>
   );
 };
 
-export default MagicBentoWrapper; 
+export default MagicBentoElement; 

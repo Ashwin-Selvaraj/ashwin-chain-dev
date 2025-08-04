@@ -4,8 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import MagicBento from './MagicBento';
-import MagicBentoWrapper from './MagicBentoWrapper';
+import MagicBentoElement from './MagicBentoElement';
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -71,6 +70,8 @@ const ContactSection = () => {
           Get In Touch
         </h2>
         
+
+        
         <div className="grid md:grid-cols-2 gap-12">
           {/* Contact Form */}
           <div className="card-glass">
@@ -82,70 +83,85 @@ const ContactSection = () => {
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name Input with MagicBento Effect */}
               <div className="mb-6">
-                <MagicBentoWrapper 
-                  particleCount={25}
-                  glowColor="132, 0, 255"
+                <MagicBentoElement 
+                  particleCount={4}
+                  glowColor="255, 0, 0"
                   enableTilt={true}
                   clickEffect={true}
                   enableMagnetism={true}
                 >
-                  <Input
-                    type="text"
-                    name="name"
-                    placeholder="Your Name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="bg-background/50 border-border focus:border-primary"
-                  />
-                </MagicBentoWrapper>
+                  <div 
+                    className="p-3 border border-border rounded-md bg-background/50"
+                    style={{ minHeight: '40px' }}
+                  >
+                    <Input
+                      type="text"
+                      name="name"
+                      placeholder="Your Name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      className="bg-transparent border-none focus:ring-0 focus:outline-none w-full"
+                    />
+                  </div>
+                </MagicBentoElement>
               </div>
               
               {/* Email Input with MagicBento Effect */}
               <div className="mb-6">
-                <MagicBentoWrapper 
-                  particleCount={25}
-                  glowColor="132, 0, 255"
+                <MagicBentoElement 
+                  particleCount={4}
+                  glowColor="255, 0, 0"
                   enableTilt={true}
                   clickEffect={true}
                   enableMagnetism={true}
                 >
-                  <Input
-                    type="email"
-                    name="email"
-                    placeholder="Your Email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="bg-background/50 border-border focus:border-primary"
-                  />
-                </MagicBentoWrapper>
+                  <div 
+                    className="p-3 border border-border rounded-md bg-background/50"
+                    style={{ minHeight: '40px' }}
+                  >
+                    <Input
+                      type="email"
+                      name="email"
+                      placeholder="Your Email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      className="bg-transparent border-none focus:ring-0 focus:outline-none w-full"
+                    />
+                  </div>
+                </MagicBentoElement>
               </div>
               
               {/* Message Input with MagicBento Effect */}
               <div className="mb-6">
-                <MagicBentoWrapper 
-                  particleCount={25}
-                  glowColor="132, 0, 255"
+                <MagicBentoElement 
+                  particleCount={4}
+                  glowColor="255, 0, 0"
                   enableTilt={true}
                   clickEffect={true}
                   enableMagnetism={true}
                 >
-                  <Textarea
-                    name="message"
-                    placeholder="Your Message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    rows={5}
-                    className="bg-background/50 border-border focus:border-primary resize-none"
-                  />
-                </MagicBentoWrapper>
+                  <div 
+                    className="p-3 border border-border rounded-md bg-background/50"
+                    style={{ minHeight: '120px' }}
+                  >
+                    <Textarea
+                      name="message"
+                      placeholder="Your Message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      required
+                      rows={5}
+                      className="bg-transparent border-none focus:ring-0 focus:outline-none w-full resize-none"
+                    />
+                  </div>
+                </MagicBentoElement>
               </div>
               
               <Button type="submit" className="w-full btn-hero">
-                Send Message
-              </Button>
+                  Send Message
+                </Button>
             </form>
           </div>
           
@@ -160,13 +176,13 @@ const ContactSection = () => {
               {/* Social Links with Glow Effect */}
               <div className="grid grid-cols-2 gap-4">
                 {socialLinks.map((link) => (
-                  <MagicBentoWrapper
+                  <MagicBentoElement
                     key={link.name}
-                    particleCount={20}
-                    glowColor="132, 0, 255"
-                    enableTilt={false}
+                    particleCount={4}
+                    glowColor="255, 0, 0"
+                    enableTilt={true}
                     clickEffect={true}
-                    enableMagnetism={false}
+                    enableMagnetism={true}
                   >
                     <a
                       href={link.url}
@@ -177,7 +193,7 @@ const ContactSection = () => {
                       <link.icon className="w-5 h-5" />
                       <span className="font-medium">{link.name}</span>
                     </a>
-                  </MagicBentoWrapper>
+                  </MagicBentoElement>
                 ))}
               </div>
             </div>
