@@ -14,59 +14,59 @@ const ProjectsSection = () => {
   const companyProjects = [
     {
       title: "TheMemeTV",
-      description: "A streak-based rewards platform that gamifies TV watching using on-chain token claims and Web3 incentives.",
-      tags: ["Web3", "Ethereum", "Rewards", "Streak System"],
+      description: "A gamified Web3 platform where users earn rewards by doing Nothing or by tapping, climbing levels like 'Colossal Squid' while using boosters to multiply their points.",
+      tags: ["Mini-app", "Gamification", "Meme Token", "Binance Smart Chain", "Ton", "React"],
       github: "#",
       live: "https://www.thememe.tv/"
     },
     {
       title: "Square NFT",
-      description: "NFT minting and management system designed for creators and collectors.",
-      tags: ["NFT", "Smart Contracts", "IPFS"],
+      description: "A global land ownership platform where users can buy fractionalized real estate — as small as 1 square foot — with ownership recorded transparently on-chain.",
+      tags: ["Real Estate", "NFT", "Fractional Ownership", "Smart Contracts", "RWA"],
       github: "#",
       live: "https://www.squarenft.com/"
     },
     {
       title: "Coin Diary",
-      description: "A daily journaling app integrated with blockchain data to log market sentiment and personal trading notes.",
-      tags: ["Crypto", "React", "Blockchain Logs"],
+      description: "A journaling app that merges personal reflections with live blockchain market data to help traders document sentiment and strategy daily.",
+      tags: ["Predictions", "Historical Data", "Blockchain", "Trading Tools"],
       github: "#",
       live: "https://coindiary.com/"
     },
     {
       title: "TheBitcoin.com",
-      description: "A Bitcoin-focused web portal with educational content and interactive features for newcomers.",
-      tags: ["Bitcoin", "Web3", "Education"],
+      description: "An India-first crypto exchange bringing digital asset trading to the masses—both online and through upcoming physical stores across the country.",
+      tags: ["Bitcoin", "Crypto Exchange", "Buy & Sell", "Cryptocurrency"],
       github: "#",
       live: "https://thebitcoin.com/"
     },
     {
       title: "Decentric.io",
-      description: "A unified dApp interface for tracking wallet performance and interacting with smart contracts across chains.",
-      tags: ["Multi-chain", "dApp Dashboard", "React"],
+      description: "A multi-chain dApp dashboard and launchpad for AI protocols—helping users manage wallets, interact with smart contracts, and track performance across ecosystems.",
+      tags: ["Launchpad", "dApp Dashboard", "Multi-chain", "Next.js"],
       github: "#",
       live: "https://decentric.io/"
-    }
+    }    
   ];
 
   const personalProjects = [
     {
       title: "Decentralized Lottery",
       description: "A smart contract-based lottery system with provable fairness and no central authority.",
-      tags: ["Solidity", "Randomness", "Smart Contracts"],
+      tags: ["Solidity", "Randomness", "Chainlink", "Ethereum"],
       github: "https://github.com/Ashwin-Selvaraj/Decentralized-Lottery.git",
       live: "https://decentralized-lottery-six.vercel.app/"
     },
     {
       title: "Token Faucet",
-      description: "A simple dApp to distribute test tokens on a custom network.",
-      tags: ["Web3", "Faucet", "Ethereum"],
+      description: "A simple dApp to distribute my test tokens on a custom network.",
+      tags: ["Token", "Faucet", "Polygon"],
       github: "https://github.com/Ashwin-Selvaraj/Token-Faucet-Dapp.git",
       live: "https://token-faucet-dapp.vercel.app/"
     },
     {
       title: "NFT Mint",
-      description: "An NFT minting portal allowing users to upload metadata and mint directly from the frontend.",
+      description: "A personal NFT minting portal where users can mint my custom NFTs directly from the frontend.",
       tags: ["NFT", "React", "IPFS", "Ethereum"],
       github: "https://github.com/Ashwin-Selvaraj/NFT-FULL-MINT-WEBSITE.git",
       live: "https://nft-full-mint-website.vercel.app/"
