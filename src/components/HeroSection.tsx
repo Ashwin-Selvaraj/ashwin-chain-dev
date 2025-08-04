@@ -1,5 +1,6 @@
 import { ArrowDown, Github, Mail } from 'lucide-react';
 import ParticleBackground from './ParticleBackground';
+import SilkBackground from './SilkBackground';
 import { Button } from '@/components/ui/button';
 
 const HeroSection = () => {
@@ -10,10 +11,17 @@ const HeroSection = () => {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <SilkBackground 
+        speed={1}
+        scale={0.8}
+        color="#4c1d95"
+        noiseIntensity={0.8}
+        rotation={0.05}
+      />
       <ParticleBackground />
       
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-background/90" />
+      <div className="absolute inset-0 bg-gradient-to-br from-background/80 via-background/70 to-background/60" />
       
       <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
         <h1 className="text-6xl md:text-8xl font-bold mb-6 animate-fade-in">
