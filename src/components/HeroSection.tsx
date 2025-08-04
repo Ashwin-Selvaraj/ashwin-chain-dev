@@ -4,6 +4,7 @@ import SilkBackground from './SilkBackground';
 import { Button } from '@/components/ui/button';
 import { useIntersectionObserver } from '@/hooks/use-intersection-observer';
 import RotatingText from './RotatingText';
+import DecryptedText from './DecryptedText';
 
 const HeroSection = () => {
   const { elementRef, isIntersecting } = useIntersectionObserver({
@@ -41,7 +42,17 @@ const HeroSection = () => {
       
       <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
         <h1 className="text-6xl md:text-8xl font-bold mb-6 animate-fade-in">
-          <span className="text-gradient-primary animate-glow">Ashwin</span>
+          <DecryptedText
+            text="Ashwin"
+            animateOn="hover"
+            speed={100}
+            maxIterations={15}
+            sequential={true}
+            revealDirection="start"
+            className="text-white font-bold font-mono drop-shadow-lg"
+            encryptedClassName="text-primary/60 font-mono"
+            parentClassName="cursor-pointer"
+          />
         </h1>
         
         <h2 className="text-2xl md:text-3xl text-muted-foreground mb-6 animate-fade-in [animation-delay:0.3s] flex flex-wrap items-center justify-center gap-2">
@@ -109,7 +120,10 @@ const HeroSection = () => {
       {/* Scroll indicator */}
       <button 
         onClick={() => scrollToSection('about')}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-muted-foreground hover:text-primary transition-all duration-300 animate-float"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-muted-foreground hover:text-primary transition-all duration-300"
+        style={{
+          animation: 'float 1s ease-in-out infinite'
+        }}
       >
         <ArrowDown size={24} />
       </button>

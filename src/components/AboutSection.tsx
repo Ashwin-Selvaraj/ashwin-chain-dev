@@ -61,20 +61,21 @@ const AboutSection = () => {
           {/* Content */}
           <div className="space-y-6">
             <div className="text-lg text-muted-foreground leading-relaxed space-y-4">
-              <p>
-                <span className="text-primary font-semibold">Hi, I'm Ashwin.</span>
-              </p>
-              <p>
-                I am a blockchain developer with over 3 years of experience.
-              </p>
-              <p>
-                I have written hundreds of smart contracts, organized Ethereum and Bitcoin community events, and focus on developer experience, scalability, and cryptoeconomics.
-              </p>
+            <h3>
+              <span className="text-primary font-semibold">Blockchain developer building the future, one block at a time.</span>
+            </h3>
+            <p>
+              Over 4 years of experience crafting smart contracts and scalable decentralized systems.
+            </p>
+            <p>
+              From writing hundreds of contracts to organizing Ethereum community events, my focus is on developer experience, scalability, and cryptoeconomics.
+            </p>
+
             </div>
             
             {/* Skills */}
             <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-foreground">Skills & Technologies</h3>
+              <h3 className="text-primary font-semibold">Skills & Technologies</h3>
               <ScrollVelocity
                 texts={skills}
                 velocity={50}
