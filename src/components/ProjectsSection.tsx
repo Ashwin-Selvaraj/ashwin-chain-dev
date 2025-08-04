@@ -1,36 +1,119 @@
 import { ExternalLink, Github } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import memeTvImage from '@/assets/meme-tv-project.jpg';
-import eventOrganizerImage from '@/assets/event-organizer-project.jpg';
-import pizzaDayImage from '@/assets/pizza-day-project.jpg';
+import { Badge } from '@/components/ui/badge';
 
 const ProjectsSection = () => {
-  const projects = [
+  const companyProjects = [
     {
-      title: "The Meme TV",
-      description: "A streak and rewards-based TV application with onchain claims. Built with React, Solana, and modern Web3 infrastructure.",
-      image: memeTvImage,
-      github: "https://github.com/ashwin/meme-tv",
-      live: "https://memetv.example.com",
-      tags: ["Solana", "React", "Web3", "Rewards"]
+      title: "TheMemeTV",
+      description: "A streak-based rewards platform that gamifies TV watching using on-chain token claims and Web3 incentives.",
+      tags: ["Web3", "Ethereum", "Rewards", "Streak System"],
+      github: "#",
+      live: "#"
     },
     {
-      title: "Event Organizer dApp",
-      description: "Decentralized event ticketing with NFT-based access. Ethereum-powered platform for seamless event management.",
-      image: eventOrganizerImage,
-      github: "https://github.com/ashwin/event-organizer",
-      live: "https://events.example.com",
-      tags: ["Ethereum", "NFTs", "Smart Contracts", "Events"]
+      title: "Square NFT",
+      description: "NFT minting and management system designed for creators and collectors.",
+      tags: ["NFT", "Smart Contracts", "IPFS"],
+      github: "#",
+      live: "#"
     },
     {
-      title: "Bitcoin Pizza Day POAP",
-      description: "Community event and NFT minting portal celebrating Bitcoin Pizza Day with collectible POAPs.",
-      image: pizzaDayImage,
-      github: "https://github.com/ashwin/pizza-day-poap",
-      live: "https://pizzaday.example.com",
-      tags: ["Bitcoin", "POAPs", "Community", "NFTs"]
+      title: "Coin Diary",
+      description: "A daily journaling app integrated with blockchain data to log market sentiment and personal trading notes.",
+      tags: ["Crypto", "React", "Blockchain Logs"],
+      github: "#",
+      live: "#"
+    },
+    {
+      title: "TheBitcoin.com",
+      description: "A Bitcoin-focused web portal with educational content and interactive features for newcomers.",
+      tags: ["Bitcoin", "Web3", "Education"],
+      github: "#",
+      live: "#"
+    },
+    {
+      title: "Decentric.io",
+      description: "A unified dApp interface for tracking wallet performance and interacting with smart contracts across chains.",
+      tags: ["Multi-chain", "dApp Dashboard", "React"],
+      github: "#",
+      live: "#"
     }
   ];
+
+  const personalProjects = [
+    {
+      title: "Decentralized Lottery",
+      description: "A smart contract-based lottery system with provable fairness and no central authority.",
+      tags: ["Solidity", "Randomness", "Smart Contracts"],
+      github: "#",
+      live: "#"
+    },
+    {
+      title: "Token Faucet",
+      description: "A simple dApp to distribute test tokens on a custom network.",
+      tags: ["Web3", "Faucet", "Ethereum"],
+      github: "#",
+      live: "#"
+    },
+    {
+      title: "NFT Mint",
+      description: "An NFT minting portal allowing users to upload metadata and mint directly from the frontend.",
+      tags: ["NFT", "React", "IPFS", "Ethereum"],
+      github: "#",
+      live: "#"
+    }
+  ];
+
+  const ProjectCard = ({ project, index }: { project: typeof companyProjects[0], index: number }) => (
+    <div 
+      className="card-project animate-fade-in"
+      style={{ animationDelay: `${index * 0.1}s` }}
+    >
+      <div className="p-6 space-y-4">
+        <h3 className="text-xl font-semibold text-foreground">
+          {project.title}
+        </h3>
+        
+        <p className="text-muted-foreground text-sm leading-relaxed">
+          {project.description}
+        </p>
+        
+        <div className="flex flex-wrap gap-2">
+          {project.tags.map((tag) => (
+            <Badge key={tag} variant="secondary" className="text-xs">
+              {tag}
+            </Badge>
+          ))}
+        </div>
+        
+        <div className="flex gap-3 pt-2">
+          <Button 
+            variant="outline" 
+            size="sm"
+            className="flex-1"
+            asChild
+          >
+            <a href={project.github} target="_blank" rel="noopener noreferrer">
+              <Github className="w-4 h-4 mr-2" />
+              GitHub
+            </a>
+          </Button>
+          
+          <Button 
+            size="sm"
+            className="flex-1 btn-hero"
+            asChild
+          >
+            <a href={project.live} target="_blank" rel="noopener noreferrer">
+              <ExternalLink className="w-4 h-4 mr-2" />
+              Live Demo
+            </a>
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <section id="projects" className="py-20 px-6 bg-muted/30">
@@ -39,73 +122,30 @@ const ProjectsSection = () => {
           Projects
         </h2>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <div 
-              key={project.title} 
-              className="card-project animate-fade-in"
-              style={{ animationDelay: `${index * 0.2}s` }}
-            >
-              {/* Project Image */}
-              <div className="relative overflow-hidden">
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
-              </div>
-              
-              {/* Project Content */}
-              <div className="p-6 space-y-4">
-                <h3 className="text-xl font-semibold text-foreground">
-                  {project.title}
-                </h3>
-                
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {project.description}
-                </p>
-                
-                {/* Tags */}
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span 
-                      key={tag}
-                      className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-md"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                
-                {/* Buttons */}
-                <div className="flex gap-3 pt-2">
-                  <Button 
-                    variant="outline" 
-                    size="sm"
-                    className="flex-1"
-                    asChild
-                  >
-                    <a href={project.github} target="_blank" rel="noopener noreferrer">
-                      <Github className="w-4 h-4 mr-2" />
-                      Code
-                    </a>
-                  </Button>
-                  
-                  <Button 
-                    size="sm"
-                    className="flex-1 btn-hero"
-                    asChild
-                  >
-                    <a href={project.live} target="_blank" rel="noopener noreferrer">
-                      <ExternalLink className="w-4 h-4 mr-2" />
-                      Live
-                    </a>
-                  </Button>
-                </div>
-              </div>
-            </div>
-          ))}
+        {/* Company Projects */}
+        <div className="mb-16">
+          <h3 className="text-2xl font-bold mb-8 text-foreground flex items-center">
+            <span className="w-3 h-3 bg-primary rounded-full mr-3"></span>
+            Company Projects
+          </h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {companyProjects.map((project, index) => (
+              <ProjectCard key={project.title} project={project} index={index} />
+            ))}
+          </div>
+        </div>
+        
+        {/* Personal Projects */}
+        <div>
+          <h3 className="text-2xl font-bold mb-8 text-foreground flex items-center">
+            <span className="w-3 h-3 bg-secondary rounded-full mr-3"></span>
+            Personal Projects
+          </h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {personalProjects.map((project, index) => (
+              <ProjectCard key={project.title} project={project} index={index} />
+            ))}
+          </div>
         </div>
       </div>
     </section>

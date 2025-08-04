@@ -135,6 +135,11 @@ All colors MUST be HSL.
     animation: glow 2s ease-in-out infinite alternate;
   }
 
+  .animate-fade-in {
+    opacity: 0;
+    animation: fade-in 0.6s ease-out forwards;
+  }
+
   /* Particle background animation */
   .particles {
     position: absolute;
@@ -216,5 +221,16 @@ All colors MUST be HSL.
   100% {
     transform: translateY(-100vh) rotate(360deg);
     opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
