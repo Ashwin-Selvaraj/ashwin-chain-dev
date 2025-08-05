@@ -44,7 +44,7 @@ const AboutSection = () => {
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Profile Card */}
           <div className="flex justify-center">
-            <div className="w-full max-w-sm md:max-w-none">
+            <div className="w-full max-w-xs mx-auto md:max-w-none">
               <ProfileCard
                 name="ASHWIN"
                 title="Blockchain Developer"

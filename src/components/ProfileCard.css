@@ -32,7 +32,9 @@
   perspective: 500px;
   transform: translate3d(0, 0, 0.1px);
   position: relative;
-  touch-action: none;
+  touch-action: pan-y;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 .pc-card-wrapper::before {
@@ -347,9 +349,14 @@
 }
 
 @media (max-width: 768px) {
+  .pc-card-wrapper {
+    max-width: 280px;
+  }
+  
   .pc-card {
-    height: 70svh;
-    max-height: 450px;
+    height: 60svh;
+    max-height: 400px;
+    min-height: 300px;
   }
 
   .pc-details {
@@ -395,9 +402,14 @@
 }
 
 @media (max-width: 480px) {
+  .pc-card-wrapper {
+    max-width: 250px;
+  }
+  
   .pc-card {
-    height: 60svh;
-    max-height: 380px;
+    height: 55svh;
+    max-height: 350px;
+    min-height: 280px;
   }
 
   .pc-details {
