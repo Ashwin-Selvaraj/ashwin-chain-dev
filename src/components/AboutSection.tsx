@@ -55,6 +55,7 @@ const AboutSection = () => {
                 showUserInfo={true}
                 enableTilt={true}
                 enableMobileTilt={true}
+                showBehindGradient={false}
                 onContactClick={handleContactClick}
               />
             </div>

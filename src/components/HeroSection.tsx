@@ -1,4 +1,4 @@
-import { ArrowDown, Github, Mail } from 'lucide-react';
+import { ArrowDown, Github, Linkedin } from 'lucide-react';
 import ParticleBackground from './ParticleBackground';
 import SilkBackground from './SilkBackground';
 import { Button } from '@/components/ui/button';
@@ -109,10 +109,12 @@ const HeroSection = () => {
             <Github size={24} />
           </a>
           <a 
-            href="mailto:ashwin240899@gmail.com"
+            href="https://www.linkedin.com/in/ashwin240899"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-muted-foreground hover:text-primary transition-colors duration-300"
           >
-            <Mail size={24} />
+            <Linkedin size={24} />
           </a>
         </div>
       </div>
