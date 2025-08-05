@@ -43,19 +43,21 @@ const AboutSection = () => {
         
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Profile Card */}
-          <div className="flex justify-center md:justify-start">
-            <ProfileCard
-              name="ASHWIN"
-              title="Blockchain Developer"
-              handle="ashontech"
-              status="Online"
-              contactText="Contact Me"
-              avatarUrl={ashwinProfile}
-              showUserInfo={true}
-              enableTilt={true}
-              enableMobileTilt={false}
-              onContactClick={handleContactClick}
-            />
+          <div className="flex justify-center">
+            <div className="w-full max-w-sm md:max-w-none">
+              <ProfileCard
+                name="ASHWIN"
+                title="Blockchain Developer"
+                handle="ashontech"
+                status="Online"
+                contactText="Contact Me"
+                avatarUrl={ashwinProfile}
+                showUserInfo={true}
+                enableTilt={true}
+                enableMobileTilt={true}
+                onContactClick={handleContactClick}
+              />
+            </div>
           </div>
           
           {/* Content */}
