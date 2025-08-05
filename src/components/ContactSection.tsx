@@ -12,11 +12,66 @@ const ContactSection = () => {
     email: '',
     message: ''
   });
+  const [errors, setErrors] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
+  // Email validation function
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  // Form validation function
+  const validateForm = () => {
+    const newErrors = {
+      name: '',
+      email: '',
+      message: ''
+    };
+
+    // Name validation
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = 'Name must be at least 2 characters';
+    }
+
+    // Email validation
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!validateEmail(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    // Message validation
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is required';
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = 'Message must be at least 10 characters';
+    }
+
+    setErrors(newErrors);
+    return !Object.values(newErrors).some(error => error !== '');
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate form before submission
+    if (!validateForm()) {
+      toast({
+        title: "Validation Error",
+        description: "Please fix the errors in the form.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     
     try {
@@ -39,6 +94,7 @@ const ContactSection = () => {
           description: "Thank you for reaching out. I'll get back to you soon.",
         });
         setFormData({ name: '', email: '', message: '' });
+        setErrors({ name: '', email: '', message: '' });
       } else {
         throw new Error('Failed to send message');
       }
@@ -118,7 +174,9 @@ const ContactSection = () => {
                   enableMagnetism={true}
                 >
                   <div 
-                    className="p-3 border border-border rounded-md bg-background/50"
+                    className={`p-3 border rounded-md bg-background/50 ${
+                      errors.name ? 'border-red-500' : 'border-border'
+                    }`}
                     style={{ minHeight: '40px' }}
                   >
                     <Input
@@ -132,6 +190,9 @@ const ContactSection = () => {
                     />
                   </div>
                 </MagicBentoElement>
+                {errors.name && (
+                  <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+                )}
               </div>
               
               {/* Email Input with MagicBento Effect */}
@@ -144,7 +205,9 @@ const ContactSection = () => {
                   enableMagnetism={true}
                 >
                   <div 
-                    className="p-3 border border-border rounded-md bg-background/50"
+                    className={`p-3 border rounded-md bg-background/50 ${
+                      errors.email ? 'border-red-500' : 'border-border'
+                    }`}
                     style={{ minHeight: '40px' }}
                   >
                     <Input
@@ -158,6 +221,9 @@ const ContactSection = () => {
                     />
                   </div>
                 </MagicBentoElement>
+                {errors.email && (
+                  <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                )}
               </div>
               
               {/* Message Input with MagicBento Effect */}
@@ -170,7 +236,9 @@ const ContactSection = () => {
                   enableMagnetism={true}
                 >
                   <div 
-                    className="p-3 border border-border rounded-md bg-background/50"
+                    className={`p-3 border rounded-md bg-background/50 ${
+                      errors.message ? 'border-red-500' : 'border-border'
+                    }`}
                     style={{ minHeight: '120px' }}
                   >
                     <Textarea
@@ -184,6 +252,9 @@ const ContactSection = () => {
                     />
                   </div>
                 </MagicBentoElement>
+                {errors.message && (
+                  <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+                )}
               </div>
               
               <Button 
