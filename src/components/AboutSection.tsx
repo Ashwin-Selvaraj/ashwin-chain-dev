@@ -26,7 +26,7 @@ const AboutSection = () => {
     <section 
       ref={elementRef}
       id="about" 
-      className={`py-20 px-6 relative transition-opacity duration-500 ${
+      className={`py-12 md:py-20 px-4 md:px-6 relative transition-opacity duration-500 ${
         isIntersecting ? 'opacity-100' : 'opacity-0'
       }`}
     >
@@ -37,11 +37,11 @@ const AboutSection = () => {
       <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent pointer-events-none z-10" />
       
       <div className="max-w-6xl mx-auto relative z-20">
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-gradient-primary">
+        <h2 className="text-3xl md:text-5xl font-bold text-center mb-8 md:mb-16 text-gradient-primary">
           About Me
         </h2>
         
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Profile Card */}
           <div className="flex justify-center md:justify-start">
             <ProfileCard
@@ -59,8 +59,8 @@ const AboutSection = () => {
           </div>
           
           {/* Content */}
-          <div className="space-y-6">
-            <div className="text-lg text-muted-foreground leading-relaxed space-y-4">
+          <div className="space-y-4 md:space-y-6">
+            <div className="text-base md:text-lg text-muted-foreground leading-relaxed space-y-3 md:space-y-4">
             <h3>
               <span className="text-primary font-semibold">Blockchain developer building the future, one block at a time.</span>
             </h3>
