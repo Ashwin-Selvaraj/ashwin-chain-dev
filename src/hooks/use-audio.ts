@@ -13,29 +13,24 @@ export const useAudio = ({ src, volume = 0.3, loop = false }: UseAudioOptions) =
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      console.log('Creating audio with src:', src);
-      audioRef.current = new Audio(src);
+      // Create audio element
+      audioRef.current = new Audio();
       audioRef.current.volume = volume;
       audioRef.current.loop = loop;
       audioRef.current.preload = 'auto';
       
-      // Add event listeners for debugging
-      audioRef.current.addEventListener('loadstart', () => console.log('Audio loadstart'));
+      // Add event listeners
       audioRef.current.addEventListener('canplay', () => {
-        console.log('Audio canplay');
         setIsReady(true);
       });
-      audioRef.current.addEventListener('canplaythrough', () => console.log('Audio canplaythrough'));
       audioRef.current.addEventListener('error', (e) => console.error('Audio error:', e));
-      audioRef.current.addEventListener('load', () => console.log('Audio loaded'));
-      audioRef.current.addEventListener('loadeddata', () => console.log('Audio loadeddata'));
       
-      console.log('Audio created successfully');
+      // Set source after adding listeners
+      audioRef.current.src = src;
     }
 
     // Add user interaction listener
     const handleUserInteraction = () => {
-      console.log('User interaction detected');
       setHasUserInteracted(true);
       document.removeEventListener('click', handleUserInteraction);
       document.removeEventListener('keydown', handleUserInteraction);
@@ -58,23 +53,25 @@ export const useAudio = ({ src, volume = 0.3, loop = false }: UseAudioOptions) =
   }, [src, volume, loop]);
 
   const play = () => {
-    console.log('Attempting to play audio...');
-    console.log('audioRef.current:', !!audioRef.current);
-    console.log('isReady:', isReady);
-    console.log('hasUserInteracted:', hasUserInteracted);
-    
     if (audioRef.current && isReady && hasUserInteracted) {
       audioRef.current.currentTime = 0;
-      audioRef.current.play().then(() => {
-        console.log('Audio started playing successfully');
-      }).catch((error) => {
+      audioRef.current.play().catch((error) => {
         console.error('Audio play error:', error);
+        // Fallback: try to play without user interaction check in case of autoplay policy issues
+        if (audioRef.current) {
+          audioRef.current.play().catch((fallbackError) => {
+            console.error('Fallback audio play also failed:', fallbackError);
+          });
+        }
       });
     } else {
-      console.log('Cannot play audio - conditions not met');
-      console.log('audioRef.current:', !!audioRef.current);
-      console.log('isReady:', isReady);
-      console.log('hasUserInteracted:', hasUserInteracted);
+      // Fallback: try to play even without user interaction
+      if (audioRef.current && isReady) {
+        audioRef.current.currentTime = 0;
+        audioRef.current.play().catch((error) => {
+          console.error('Fallback audio play failed:', error);
+        });
+      }
     }
   };
 
@@ -88,7 +85,6 @@ export const useAudio = ({ src, volume = 0.3, loop = false }: UseAudioOptions) =
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
-      console.log('Audio stopped');
     }
   };
 

@@ -22,15 +22,8 @@ const TargetCursor = ({
     loop: false
   });
   
-  console.log('TargetCursor audio state:', { isReady, hasUserInteracted, audioSrc });
-  
   // State to track if audio has been played for current target
   const [hasPlayedAudio, setHasPlayedAudio] = useState(false);
-  
-  // Debug effect to track audio state changes
-  useEffect(() => {
-    console.log('TargetCursor audio state changed:', { isReady, hasUserInteracted, hasPlayedAudio });
-  }, [isReady, hasUserInteracted, hasPlayedAudio]);
   const constants = useMemo(
     () => ({
       borderWidth: 3,
@@ -176,7 +169,6 @@ const TargetCursor = ({
 
     //----------------------------------------------------------------
     const enterHandler = (e) => {
-      console.log('Enter handler triggered');
       const directTarget = e.target;
 
       const allTargets = [];
@@ -189,7 +181,6 @@ const TargetCursor = ({
       }
 
       const target = allTargets[0] || null;
-      console.log('Target found:', !!target, 'Target element:', target?.tagName, target?.className);
       if (!target || !cursorRef.current || !cornersRef.current) return;
 
       if (activeTarget === target) return;
@@ -276,16 +267,9 @@ const TargetCursor = ({
       updateCorners(undefined, undefined);
 
       // Play audio when cursor locks onto target
-      console.log('About to check audio conditions for target lock');
-      console.log('Conditions:', { isReady, hasUserInteracted, hasPlayedAudio });
-      
       if (isReady && hasUserInteracted && !hasPlayedAudio) {
-        console.log('Playing target lock audio');
         playAudio();
         setHasPlayedAudio(true); // Mark as played for this target
-      } else {
-        console.log('Audio not ready for target lock or user has not interacted or already played');
-        console.log('isReady:', isReady, 'hasUserInteracted:', hasUserInteracted, 'hasPlayedAudio:', hasPlayedAudio);
       }
 
       setTimeout(() => {
@@ -306,7 +290,6 @@ const TargetCursor = ({
         activeTarget = null;
         isAnimatingToTarget = false;
         setHasPlayedAudio(false); // Reset audio flag when leaving target
-        console.log('Cursor left target');
 
         if (cornersRef.current) {
           const corners = Array.from(cornersRef.current);

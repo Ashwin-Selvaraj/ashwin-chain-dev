@@ -48,6 +48,8 @@ export default function DecryptedText({
     volume: 0.2,
     loop: true
   });
+  
+
 
   useEffect(() => {
     let interval
@@ -126,13 +128,9 @@ export default function DecryptedText({
 
     if (isHovering) {
       setIsScrambling(true)
-      console.log('Starting audio for decoding animation, isReady:', isReady, 'hasUserInteracted:', hasUserInteracted);
       if (isReady && hasUserInteracted && !hasPlayedAudio) {
-        console.log('Playing decoding audio');
         playAudio() // Start audio when scrambling begins
         setHasPlayedAudio(true) // Mark as played for this hover session
-      } else {
-        console.log('Cannot play decoding audio - conditions not met or already played');
       }
       interval = setInterval(() => {
         setRevealedIndices((prevRevealed) => {
@@ -220,11 +218,9 @@ export default function DecryptedText({
     animateOn === 'hover'
       ? {
         onMouseEnter: () => {
-          console.log('Mouse entered - starting hover');
           setIsHovering(true);
         },
         onMouseLeave: () => {
-          console.log('Mouse left - stopping hover');
           setIsHovering(false);
         },
       }
@@ -249,6 +245,8 @@ export default function DecryptedText({
           )
         })}
       </span>
+      
+
     </motion.span>
   )
 } 
