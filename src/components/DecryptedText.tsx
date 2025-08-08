@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import { motion } from 'framer-motion'
+import { useAudio } from '@/hooks/use-audio'
 
 const styles = {
   wrapper: {
@@ -30,6 +31,7 @@ export default function DecryptedText({
   parentClassName = '',
   encryptedClassName = '',
   animateOn = 'hover',
+  audioSrc = '/decoding-67661.mp3',
   ...props
 }) {
   const [displayText, setDisplayText] = useState(text);
@@ -38,6 +40,13 @@ export default function DecryptedText({
   const [revealedIndices, setRevealedIndices] = useState(new Set());
   const [hasAnimated, setHasAnimated] = useState(false);
   const containerRef = useRef(null);
+  
+  // Audio hook for decoding sound
+  const { play: playAudio, stop: stopAudio, isReady } = useAudio({
+    src: audioSrc,
+    volume: 0.2,
+    loop: true
+  });
 
   useEffect(() => {
     let interval
@@ -116,6 +125,10 @@ export default function DecryptedText({
 
     if (isHovering) {
       setIsScrambling(true)
+      console.log('Starting audio for decoding animation, isReady:', isReady);
+      if (isReady) {
+        playAudio() // Start audio when scrambling begins
+      }
       interval = setInterval(() => {
         setRevealedIndices((prevRevealed) => {
           if (sequential) {
@@ -128,6 +141,7 @@ export default function DecryptedText({
             } else {
               clearInterval(interval)
               setIsScrambling(false)
+              stopAudio() // Stop audio when sequential animation completes
               return prevRevealed
             }
           } else {
@@ -136,6 +150,7 @@ export default function DecryptedText({
             if (currentIteration >= maxIterations) {
               clearInterval(interval)
               setIsScrambling(false)
+              stopAudio() // Stop audio when non-sequential animation completes
               setDisplayText(text)
             }
             return prevRevealed
@@ -146,6 +161,8 @@ export default function DecryptedText({
       setDisplayText(text)
       setRevealedIndices(new Set())
       setIsScrambling(false)
+      console.log('Stopping audio - not hovering');
+      stopAudio() // Stop audio when not hovering
     }
 
     return () => {
@@ -196,8 +213,14 @@ export default function DecryptedText({
   const hoverProps =
     animateOn === 'hover'
       ? {
-        onMouseEnter: () => setIsHovering(true),
-        onMouseLeave: () => setIsHovering(false),
+        onMouseEnter: () => {
+          console.log('Mouse entered - starting hover');
+          setIsHovering(true);
+        },
+        onMouseLeave: () => {
+          console.log('Mouse left - stopping hover');
+          setIsHovering(false);
+        },
       }
       : {}
 

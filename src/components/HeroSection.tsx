@@ -52,6 +52,7 @@ const HeroSection = () => {
             className="text-white font-bold font-mono drop-shadow-lg"
             encryptedClassName="text-primary/60 font-mono"
             parentClassName="cursor-pointer"
+            audioSrc="/decoding-67661.mp3"
           />
         </h1>
         
