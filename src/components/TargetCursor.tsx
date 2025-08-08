@@ -1,17 +1,26 @@
 import { useEffect, useRef, useCallback, useMemo } from "react";
 import { gsap } from "gsap";
 import "./TargetCursor.css";
+import { useAudio } from '@/hooks/use-audio';
 
 const TargetCursor = ({
   targetSelector = ".cursor-target",
   spinDuration = 2,
   hideDefaultCursor = true,
   sectionId = null,
+  audioSrc = "/Target-locked.mp3",
 }) => {
   const cursorRef = useRef(null);
   const cornersRef = useRef(null);
   const spinTl = useRef(null);
   const dotRef = useRef(null);
+  
+  // Audio hook for target lock sound
+  const { play: playAudio, stop: stopAudio, isReady } = useAudio({
+    src: audioSrc,
+    volume: 0.3,
+    loop: false
+  });
   const constants = useMemo(
     () => ({
       borderWidth: 3,
@@ -254,6 +263,14 @@ const TargetCursor = ({
       isAnimatingToTarget = true;
       updateCorners(undefined, undefined);
 
+      // Play audio when cursor locks onto target
+      if (isReady) {
+        console.log('Playing target lock audio');
+        playAudio();
+      } else {
+        console.log('Audio not ready for target lock');
+      }
+
       setTimeout(() => {
         isAnimatingToTarget = false;
       }, 1);
@@ -271,6 +288,7 @@ const TargetCursor = ({
       const leaveHandler = () => {
         activeTarget = null;
         isAnimatingToTarget = false;
+        console.log('Cursor left target');
 
         if (cornersRef.current) {
           const corners = Array.from(cornersRef.current);

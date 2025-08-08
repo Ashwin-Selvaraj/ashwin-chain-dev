@@ -68,6 +68,7 @@ const ExperienceSection = () => {
         hideDefaultCursor={false}
         targetSelector=".cursor-target"
         sectionId="experience"
+        audioSrc="/Target-locked.mp3"
       />
       {/* Subtle gradient overlays */}
       <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-background to-transparent z-10 pointer-events-none" />
