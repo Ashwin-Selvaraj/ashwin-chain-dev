@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Audio Test</title>
+</head>
+<body>
+    <h1>Audio Test</h1>
+    <button onclick="playDecoding()">Play Decoding Audio</button>
+    <button onclick="playTarget()">Play Target Audio</button>
+    
+    <audio id="decoding" src="/decoding-67661.mp3" preload="auto"></audio>
+    <audio id="target" src="/Target-locked.mp3" preload="auto"></audio>
+    
+    <script>
+        function playDecoding() {
+            const audio = document.getElementById('decoding');
+            audio.currentTime = 0;
+            audio.play().then(() => {
+                console.log('Decoding audio started');
+            }).catch(error => {
+                console.error('Decoding audio error:', error);
+            });
+        }
+        
+        function playTarget() {
+            const audio = document.getElementById('target');
+            audio.currentTime = 0;
+            audio.play().then(() => {
+                console.log('Target audio started');
+            }).catch(error => {
+                console.error('Target audio error:', error);
+            });
+        }
+    </script>
+</body>
+</html> 

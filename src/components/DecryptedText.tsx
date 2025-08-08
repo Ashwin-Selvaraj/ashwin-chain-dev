@@ -39,10 +39,11 @@ export default function DecryptedText({
   const [isScrambling, setIsScrambling] = useState(false);
   const [revealedIndices, setRevealedIndices] = useState(new Set());
   const [hasAnimated, setHasAnimated] = useState(false);
+  const [hasPlayedAudio, setHasPlayedAudio] = useState(false);
   const containerRef = useRef(null);
   
   // Audio hook for decoding sound
-  const { play: playAudio, stop: stopAudio, isReady } = useAudio({
+  const { play: playAudio, stop: stopAudio, isReady, hasUserInteracted } = useAudio({
     src: audioSrc,
     volume: 0.2,
     loop: true
@@ -125,9 +126,13 @@ export default function DecryptedText({
 
     if (isHovering) {
       setIsScrambling(true)
-      console.log('Starting audio for decoding animation, isReady:', isReady);
-      if (isReady) {
+      console.log('Starting audio for decoding animation, isReady:', isReady, 'hasUserInteracted:', hasUserInteracted);
+      if (isReady && hasUserInteracted && !hasPlayedAudio) {
+        console.log('Playing decoding audio');
         playAudio() // Start audio when scrambling begins
+        setHasPlayedAudio(true) // Mark as played for this hover session
+      } else {
+        console.log('Cannot play decoding audio - conditions not met or already played');
       }
       interval = setInterval(() => {
         setRevealedIndices((prevRevealed) => {
@@ -161,6 +166,7 @@ export default function DecryptedText({
       setDisplayText(text)
       setRevealedIndices(new Set())
       setIsScrambling(false)
+      setHasPlayedAudio(false) // Reset audio flag when not hovering
       console.log('Stopping audio - not hovering');
       stopAudio() // Stop audio when not hovering
     }
