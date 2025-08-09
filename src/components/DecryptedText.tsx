@@ -46,8 +46,25 @@ export default function DecryptedText({
   const { play: playAudio, stop: stopAudio, isReady, hasUserInteracted } = useAudio({
     src: audioSrc,
     volume: 0.2,
-    loop: true
+    loop: false
   });
+  
+  // Simple audio ref for direct testing
+  const simpleAudioRef = useRef<HTMLAudioElement | null>(null);
+  
+  useEffect(() => {
+    simpleAudioRef.current = new Audio(audioSrc);
+    simpleAudioRef.current.volume = 0.2;
+    simpleAudioRef.current.loop = false;
+    simpleAudioRef.current.preload = 'auto';
+    
+    return () => {
+      if (simpleAudioRef.current) {
+        simpleAudioRef.current.pause();
+        simpleAudioRef.current = null;
+      }
+    };
+  }, [audioSrc]);
   
 
 
@@ -128,9 +145,19 @@ export default function DecryptedText({
 
     if (isHovering) {
       setIsScrambling(true)
-      if (isReady && hasUserInteracted && !hasPlayedAudio) {
-        playAudio() // Start audio when scrambling begins
-        setHasPlayedAudio(true) // Mark as played for this hover session
+      // Try the simple audio approach first
+      if (simpleAudioRef.current && !hasPlayedAudio) {
+        simpleAudioRef.current.currentTime = 0;
+        simpleAudioRef.current.play().catch((error) => {
+          // Fallback to useAudio hook
+          if (isReady && !hasPlayedAudio) {
+            playAudio();
+          }
+        });
+        setHasPlayedAudio(true);
+      } else if (isReady && !hasPlayedAudio) {
+        playAudio();
+        setHasPlayedAudio(true);
       }
       interval = setInterval(() => {
         setRevealedIndices((prevRevealed) => {
@@ -165,8 +192,13 @@ export default function DecryptedText({
       setRevealedIndices(new Set())
       setIsScrambling(false)
       setHasPlayedAudio(false) // Reset audio flag when not hovering
-      console.log('Stopping audio - not hovering');
       stopAudio() // Stop audio when not hovering
+      
+      // Also stop the simple audio
+      if (simpleAudioRef.current) {
+        simpleAudioRef.current.pause();
+        simpleAudioRef.current.currentTime = 0;
+      }
     }
 
     return () => {

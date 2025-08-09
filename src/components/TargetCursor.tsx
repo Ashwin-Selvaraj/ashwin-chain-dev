@@ -267,7 +267,7 @@ const TargetCursor = ({
       updateCorners(undefined, undefined);
 
       // Play audio when cursor locks onto target
-      if (isReady && hasUserInteracted && !hasPlayedAudio) {
+      if (isReady && !hasPlayedAudio) {
         playAudio();
         setHasPlayedAudio(true); // Mark as played for this target
       }
@@ -276,6 +276,7 @@ const TargetCursor = ({
         isAnimatingToTarget = false;
       }, 1);
 
+      
       let moveThrottle = null;
       const targetMove = (ev) => {
         if (moveThrottle || isAnimatingToTarget) return;
