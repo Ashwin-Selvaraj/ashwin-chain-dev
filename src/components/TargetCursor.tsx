@@ -275,8 +275,9 @@ const TargetCursor = ({
       setTimeout(() => {
         isAnimatingToTarget = false;
       }, 1);
-
       
+
+
       let moveThrottle = null;
       const targetMove = (ev) => {
         if (moveThrottle || isAnimatingToTarget) return;
