@@ -79,10 +79,12 @@ export const useAudio = ({ src, volume = 0.3, loop = false }: UseAudioOptions) =
     // Always try to play audio, regardless of user interaction
     if (audioRef.current && isReady) {
       audioRef.current.currentTime = 0;
+      audioRef.current.loop = false; // Ensure no looping
       audioRef.current.play().catch((error) => {
         console.error('Audio play error:', error);
         // Try again without any conditions
         if (audioRef.current) {
+          audioRef.current.loop = false; // Ensure no looping
           audioRef.current.play().catch((fallbackError) => {
             console.error('Fallback audio play also failed:', fallbackError);
           });

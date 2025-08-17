@@ -39,34 +39,92 @@ export default function DecryptedText({
   const [isScrambling, setIsScrambling] = useState(false);
   const [revealedIndices, setRevealedIndices] = useState(new Set());
   const [hasAnimated, setHasAnimated] = useState(false);
-  const [hasPlayedAudio, setHasPlayedAudio] = useState(false);
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const [audioDisabled, setAudioDisabled] = useState(false);
   const containerRef = useRef(null);
+  const animationCompleteRef = useRef(false);
+  const audioTimeoutRef = useRef(null);
+  const directAudioRef = useRef(null);
   
   // Audio hook for decoding sound
-  const { play: playAudio, stop: stopAudio, isReady, hasUserInteracted } = useAudio({
+  const { play: playAudio, stop: stopAudio, pause: pauseAudio, isReady } = useAudio({
     src: audioSrc,
     volume: 0.2,
     loop: false
   });
-  
-  // Simple audio ref for direct testing
-  const simpleAudioRef = useRef<HTMLAudioElement | null>(null);
-  
+
+  // Create a direct audio element for more control
   useEffect(() => {
-    simpleAudioRef.current = new Audio(audioSrc);
-    simpleAudioRef.current.volume = 0.2;
-    simpleAudioRef.current.loop = false;
-    simpleAudioRef.current.preload = 'auto';
+    directAudioRef.current = new Audio(audioSrc);
+    directAudioRef.current.volume = 0.2;
+    directAudioRef.current.loop = false;
+    directAudioRef.current.preload = 'auto';
     
     return () => {
-      if (simpleAudioRef.current) {
-        simpleAudioRef.current.pause();
-        simpleAudioRef.current = null;
+      if (directAudioRef.current) {
+        directAudioRef.current.pause();
+        directAudioRef.current.currentTime = 0;
+        directAudioRef.current = null;
       }
     };
   }, [audioSrc]);
-  
 
+  // Nuclear option - completely disable audio
+  const disableAudioCompletely = () => {
+    setAudioDisabled(true);
+    
+    // Clear any existing timeout
+    if (audioTimeoutRef.current) {
+      clearTimeout(audioTimeoutRef.current);
+      audioTimeoutRef.current = null;
+    }
+    
+    // Stop audio from hook
+    stopAudio();
+    pauseAudio();
+    
+    // Stop direct audio element
+    if (directAudioRef.current) {
+      directAudioRef.current.pause();
+      directAudioRef.current.currentTime = 0;
+      directAudioRef.current.src = ''; // Remove source
+    }
+    
+    setIsAudioPlaying(false);
+    animationCompleteRef.current = true;
+    
+    // Force stop after a short delay to catch any delayed audio
+    audioTimeoutRef.current = setTimeout(() => {
+      stopAudio();
+      pauseAudio();
+      if (directAudioRef.current) {
+        directAudioRef.current.pause();
+        directAudioRef.current.currentTime = 0;
+        directAudioRef.current.src = '';
+      }
+      setIsAudioPlaying(false);
+    }, 10);
+  };
+
+  // Function to start audio (only if not disabled)
+  const startAudio = () => {
+    if (audioDisabled || isAudioPlaying || !isReady) return;
+    
+    // Try direct audio first
+    if (directAudioRef.current) {
+      directAudioRef.current.currentTime = 0;
+      directAudioRef.current.loop = false;
+      directAudioRef.current.play().catch(() => {
+        // Fallback to hook
+        if (!audioDisabled) {
+          playAudio();
+        }
+      });
+    } else if (!audioDisabled) {
+      playAudio();
+    }
+    setIsAudioPlaying(true);
+  };
 
   useEffect(() => {
     let interval
@@ -143,22 +201,12 @@ export default function DecryptedText({
       }
     }
 
-    if (isHovering) {
+    if (isHovering && !animationCompleteRef.current && !audioDisabled) {
       setIsScrambling(true)
-      // Try the simple audio approach first
-      if (simpleAudioRef.current && !hasPlayedAudio) {
-        simpleAudioRef.current.currentTime = 0;
-        simpleAudioRef.current.play().catch((error) => {
-          // Fallback to useAudio hook
-          if (isReady && !hasPlayedAudio) {
-            playAudio();
-          }
-        });
-        setHasPlayedAudio(true);
-      } else if (isReady && !hasPlayedAudio) {
-        playAudio();
-        setHasPlayedAudio(true);
-      }
+      
+      // Start audio
+      startAudio();
+      
       interval = setInterval(() => {
         setRevealedIndices((prevRevealed) => {
           if (sequential) {
@@ -171,7 +219,8 @@ export default function DecryptedText({
             } else {
               clearInterval(interval)
               setIsScrambling(false)
-              stopAudio() // Stop audio when sequential animation completes
+              // Completely disable audio when animation completes
+              disableAudioCompletely()
               return prevRevealed
             }
           } else {
@@ -180,24 +229,30 @@ export default function DecryptedText({
             if (currentIteration >= maxIterations) {
               clearInterval(interval)
               setIsScrambling(false)
-              stopAudio() // Stop audio when non-sequential animation completes
+              // Completely disable audio when animation completes
+              disableAudioCompletely()
               setDisplayText(text)
             }
             return prevRevealed
           }
         })
       }, speed)
-    } else {
+    } else if (!isHovering) {
       setDisplayText(text)
       setRevealedIndices(new Set())
       setIsScrambling(false)
-      setHasPlayedAudio(false) // Reset audio flag when not hovering
-      stopAudio() // Stop audio when not hovering
+      animationCompleteRef.current = false;
+      setAudioDisabled(false); // Re-enable audio for next hover
       
-      // Also stop the simple audio
-      if (simpleAudioRef.current) {
-        simpleAudioRef.current.pause();
-        simpleAudioRef.current.currentTime = 0;
+      // Stop audio when not hovering
+      if (isAudioPlaying) {
+        stopAudio();
+        pauseAudio();
+        if (directAudioRef.current) {
+          directAudioRef.current.pause();
+          directAudioRef.current.currentTime = 0;
+        }
+        setIsAudioPlaying(false);
       }
     }
 
@@ -213,7 +268,24 @@ export default function DecryptedText({
     revealDirection,
     characters,
     useOriginalCharsOnly,
+    isReady,
+    isAudioPlaying,
+    audioDisabled,
   ])
+
+  // Force stop audio when scrambling stops, regardless of hover state
+  useEffect(() => {
+    if (!isScrambling && isAudioPlaying) {
+      disableAudioCompletely()
+    }
+  }, [isScrambling, isAudioPlaying])
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      disableAudioCompletely()
+    }
+  }, [])
 
   useEffect(() => {
     if (animateOn !== 'view') return
